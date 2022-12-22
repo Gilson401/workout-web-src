@@ -2,21 +2,23 @@
 
 import 'package:flutter/cupertino.dart';
 
-class HomeController extends InheritedWidget{
+class HomeController extends InheritedNotifier<ValueNotifier<int>>{
   
   HomeController({Key? key, required Widget child})
   : super(
     key: key,
     child: child,
+    notifier: ValueNotifier(0),
   );
 
-// As duas variáveis abaixo serão acessadas pelo filho
-int value = 1;
 String homeControllerStringVar = "Text stored in homeControllerStringVar";
+int get value => notifier!.value;
 
-  @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
-    return false;
-  }
+increment (){
+  notifier!.value++;
+}
+static HomeController of(BuildContext context){
+  return   context.dependOnInheritedWidgetOfExactType<HomeController>()!;
+}
 
 }

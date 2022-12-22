@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'home_controller.dart';
 
 class StatelessHomePage extends StatelessWidget {
@@ -7,8 +6,11 @@ class StatelessHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller =
-        context.dependOnInheritedWidgetOfExactType<HomeController>()!;
+    // var controller =
+    // context.dependOnInheritedWidgetOfExactType<HomeController>()!;
+
+  var controller = HomeController.of(context);
+  final deviceWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -16,8 +18,10 @@ class StatelessHomePage extends StatelessWidget {
         elevation: 10,
       ),
       body: Center(
+        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Container(
@@ -43,7 +47,7 @@ class StatelessHomePage extends StatelessWidget {
               child: Container(
                 color: Colors.greenAccent,
                 width: MediaQuery.of(context).size.width,
-                child: Center(child: const Text('TODO: ADD CONTENT')),
+                child: Center(child: Text('Text from build : $deviceWidth')),
               ),
             ),
           ],
@@ -51,10 +55,11 @@ class StatelessHomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          controller.increment();
           print('Clicou no Floating Button');
         },
         tooltip: 'Increment',
-        child: const Icon(Icons.access_time),
+        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 10,
@@ -67,7 +72,7 @@ class StatelessHomePage extends StatelessWidget {
                   tooltip: 'Open navigation menu',
                   icon: const Icon(Icons.menu),
                   onPressed: () {
-                    print('You clicker in Open nav menu');
+                    print('You clicked in menu inferior');
                   },
                 ),
               ],

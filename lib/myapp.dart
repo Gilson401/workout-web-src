@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.cyan,
         backgroundColor: Color.fromARGB(121, 247, 247, 247),
       ),
-      home: HomeController(child: const StatelessHomePage()),
+      // home: HomeController(child: const StatelessHomePage()),
+      home:  MyHomePage(title: 'Stateful Widget Myhomepage'),
     );
   }
 }
