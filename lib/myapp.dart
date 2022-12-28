@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home_controller.dart';
-import 'myhomepage.dart';
-import 'stateless_homepage.dart';
+// import 'home_controller.dart';
+import 'my_stateful_homepage.dart';
+// import 'stateless_homepage.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: Color.fromARGB(121, 247, 247, 247),
       ),
       // home: HomeController(child: const StatelessHomePage()),
-      home:  MyHomePage(title: 'Stateful Widget Myhomepage'),
+      home:  MyStatefullHomePage(title: 'Minhas séries App'),
     );
   }
 }

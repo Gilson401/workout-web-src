@@ -6,9 +6,6 @@ class StatelessHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var controller =
-    // context.dependOnInheritedWidgetOfExactType<HomeController>()!;
-
   var controller = HomeController.of(context);
   final deviceWidth = MediaQuery.of(context).size.width;
 

@@ -11,8 +11,8 @@ class HomeController extends InheritedNotifier<ValueNotifier<int>>{
     notifier: ValueNotifier(0),
   );
 
-String homeControllerStringVar = "Text stored in homeControllerStringVar";
 int get value => notifier!.value;
+String homeControllerStringVar = "Text stored in homeControllerStringVar ";
 
 increment (){
   notifier!.value++;
