@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
-// import 'package:hello_flutter/stock.dart';
+import 'package:flutter/services.dart';
 import 'package:hello_flutter/workout.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import 'grupo_muscular.dart';
 // https://www.youtube.com/watch?v=cQbWd2tnfdc&t=2496s
 
 ///Neste exemplo ApiItemsList é o componente filho
 class ApiItemsListState extends State<ApiItemsList> {
-  var _gruposMusculares = [];
-
-final String _somestringInState = "fgd";
+  dynamic _currentColor = Color.fromARGB(0, 255, 255, 255);
+  List<GrupoMuscular> gruposMusculares = [
+    GrupoMuscular.color('Peito e Tríceps', 'assets/imgs/peito.png',
+        Color.fromARGB(155, 43, 179, 151)),
+    GrupoMuscular.color('Bíceps e Costas', 'assets/imgs/dumbbell.PNG',
+        Color.fromARGB(155, 248, 252, 35)),
+    GrupoMuscular('Ombros', 'assets/imgs/ombros.png'),
+    GrupoMuscular.color(
+        'Pernas', 'assets/imgs/leg.png', Color.fromARGB(155, 243, 79, 51)),
+  ];
+  final String _somestringInState = "fgd";
 
   _onListTileClick(workout) {
     //Abaixo vc invoca a função recebida como parâmetro
@@ -18,6 +26,11 @@ final String _somestringInState = "fgd";
   }
 
   var _items = [];
+  //List _itemsLocal = [];
+
+  List _displayItems = [];
+
+  List<Workout> _listWorkout = [];
 
   final _font = const TextStyle(
     fontSize: 15.0,
@@ -28,10 +41,31 @@ final String _somestringInState = "fgd";
   @override
   void initState() {
     super.initState();
-    _loadData();
+    // _loadData();
+    _loadDataLocal();
   }
 
-  // get _gruposMusculares => _items.map((item) => item['grupoMuscular'] as String);
+  Future<void> _loadDataLocal() async {
+    //lê o json
+    final String response = await rootBundle.loadString('assets/json/series.json');
+
+    //parseia o json para _JsonMap ou _JsonList
+    final jsonMapFromLocalJson = await json.decode(response);
+
+    //a key exercicios é um _JsonList (~array) e é atribuída a uma List<dynamic>
+    List<dynamic> exerciciosFromJson = jsonMapFromLocalJson['exercicios'];
+
+    //Uma List<dynamic> pode receber um map e retornar uma List de outro tipo
+    List<Workout> parsedListWorkout =
+        exerciciosFromJson.map((element) => Workout.fromJson(element)).toList();
+
+    setState(() {
+      // _itemsLocal = parsedListWorkout;
+      _items = parsedListWorkout;
+      _listWorkout = parsedListWorkout;
+      _displayItems = parsedListWorkout;
+    });
+  }
 
   _loadData() async {
     String workoutApi =
@@ -46,27 +80,72 @@ final String _somestringInState = "fgd";
       setState(() {
         _items = parsedListWorkout;
       });
-
-      setState(() {
-        // _gruposMusculares = parsedListWorkout.map((item) => item.grupoMuscular as List<dynamic>);
-        _gruposMusculares = parsedListWorkout
-            .map((exercicio) => exercicio.grupoMuscular)
-            .toList();
-      });
     } catch (err) {
       print(err);
     }
+  }
+
+  _filterExercicesDisplayList(GrupoMuscular grupoMuscular) {
+    print("_filterExercicesDisplayList $grupoMuscular");
+    List<Workout> filtredList = _listWorkout
+        .where((element) => element.grupoMuscular == grupoMuscular.label)
+        .toList();
+
+    setState(() {
+      _displayItems = filtredList;
+      _currentColor = grupoMuscular.color;
+    });
   }
 
   List<dynamic> gruposMusc() {
     return _items.map((exercicio) => exercicio.grupoMuscular).toList();
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget groupMusclesButtons() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          for (var i = 0; i < gruposMusculares.length; i++)
+            InkWell(
+              onTap: () {
+                print('Selecionou grupo ${gruposMusculares[i].label}');
+                _filterExercicesDisplayList(gruposMusculares[i]);
+              },
+              splashColor: Colors.blue,
+              splashFactory: InkSplash.splashFactory,
+              child: Container(
+                  margin: const EdgeInsets.all(5),
+                  width: 100,
+                  height: 110,
+                  decoration: BoxDecoration(
+                      color: gruposMusculares[i].color,
+                      borderRadius: BorderRadius.all(Radius.circular(12))),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(gruposMusculares[i].label,
+                            textAlign: TextAlign.center),
+                        SizedBox(
+                          width: 100,
+                          height: 50,
+                          child: Image.asset(
+                            gruposMusculares[i].image,
+                            fit: BoxFit.contain,
+                          ),
+                        )
+                      ])),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget itemsListViewBulder() {
     return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemCount: _items.length,
+      padding: const EdgeInsets.all(5.0),
+      itemCount: _displayItems.length,
       itemBuilder: (BuildContext context, int position) {
         return _buildRow(position);
       },
@@ -74,25 +153,49 @@ final String _somestringInState = "fgd";
   }
 
   Widget _buildRow(int position) {
+    var itemsLocally = _displayItems;
+
     return ListTile(
+        tileColor: _currentColor,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            width: 2,
+            color: Color.fromARGB(255, 255, 255, 255)
+            ),
+            borderRadius: BorderRadius.circular(20),
+        ),
         title: Text(
-          "${_items[position].nome}",
+          "${itemsLocally[position].nome}",
           textAlign: TextAlign.left,
           style: TextStyle(
               fontSize: 17, fontFamily: 'Raleway', fontWeight: FontWeight.w700),
         ),
-        subtitle:
-            Text("Grupo: ${_items[position].grupoMuscular}", style: _font),
-        leading: const Padding(
-          padding: EdgeInsets.all(2.0),
-          child: CircleAvatar(
-            backgroundColor: Colors.green,
-            backgroundImage: NetworkImage('https://picsum.photos/250?image=9'),
-          ),
-        ),
+        subtitle: Text("Grupo: ${itemsLocally[position].grupoMuscular}",
+            style: _font),
+        leading: Padding(
+            padding: EdgeInsets.all(0.5),
+            child: SizedBox(
+                width: MediaQuery.of(context).size.width / 7,
+                child: Image.network(itemsLocally[position].image, scale: 1))),
         onTap: () {
-          _onListTileClick(_items[position]);
+          _onListTileClick(itemsLocally[position]);
         });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+              color: Colors.white,
+            ),
+          child: Center(child: groupMusclesButtons())
+        ),
+        SizedBox(height: 300, child: itemsListViewBulder())
+      ],
+    );
   }
 }
 
