@@ -14,8 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.cyan,
         backgroundColor: Color.fromARGB(121, 247, 247, 247),
       ),
-      // home: HomeController(child: const StatelessHomePage()),
-      home:  MyStatefullHomePage(title: 'Minhas séries App'),
+        home:  MyStatefullHomePage(title: 'Séries de exercícios'),
     );
   }
 }
