@@ -8,7 +8,7 @@
             "name": "hello_flutter",
             "request": "launch",
             "type": "dart",
-            
+            "args": ["someArgs in launch json"]
         },
         {
             "name": "hello_flutter (profile mode)",

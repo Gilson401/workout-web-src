@@ -4,6 +4,8 @@ import 'package:hello_flutter/workout.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'grupo_muscular.dart';
+// import 'file_handler.dart';
+
 // https://www.youtube.com/watch?v=cQbWd2tnfdc&t=2496s
 
 ///Neste exemplo ApiItemsList é o componente filho
@@ -17,18 +19,21 @@ class ApiItemsListState extends State<ApiItemsList> {
     GrupoMuscular('Ombros', 'assets/imgs/ombros.png'),
     GrupoMuscular.color(
         'Pernas', 'assets/imgs/leg.png', Color.fromARGB(155, 243, 79, 51)),
+    GrupoMuscular.color(
+        'Extra', 'assets/imgs/leg.png', Color.fromARGB(155, 223, 220, 220)),
   ];
-  final String _somestringInState = "fgd";
+
 
   _onListTileClick(workout) {
     //Abaixo vc invoca a função recebida como parâmetro
     widget.setWorkout(workout);
   }
 
+var forceRender = 1;
   var _items = [];
   //List _itemsLocal = [];
 
-  List _displayItems = [];
+  List<Workout> _displayItems = [];
 
   List<Workout> _listWorkout = [];
 
@@ -36,7 +41,11 @@ class ApiItemsListState extends State<ApiItemsList> {
     fontSize: 15.0,
   );
 
-  String get grupos => _somestringInState;
+void _makeRender(){
+  setState(() {
+    forceRender = forceRender++;
+  });
+}
 
   @override
   void initState() {
@@ -45,9 +54,14 @@ class ApiItemsListState extends State<ApiItemsList> {
     _loadDataLocal();
   }
 
+
   Future<void> _loadDataLocal() async {
     //lê o json
     final String response = await rootBundle.loadString('assets/json/series.json');
+    
+    // FileHandler  frdl = FileHandler();
+    
+    // final String response = await frdl.readFile();
 
     //parseia o json para _JsonMap ou _JsonList
     final jsonMapFromLocalJson = await json.decode(response);
@@ -67,23 +81,24 @@ class ApiItemsListState extends State<ApiItemsList> {
     });
   }
 
-  _loadData() async {
-    String workoutApi =
-        "https://my-json-server.typicode.com/Gilson401/json_placeholder/exercicios";
+//este método é pela api
+  // _loadData() async {
+  //   String workoutApi =
+  //       "https://my-json-server.typicode.com/Gilson401/json_placeholder/exercicios";
 
-    try {
-      http.Response response = await http.get(Uri.parse(workoutApi));
-      List<dynamic> decoded = jsonDecode(response.body);
-      List<Workout> parsedListWorkout =
-          decoded.map((element) => Workout.fromJson(element)).toList();
+  //   try {
+  //     http.Response response = await http.get(Uri.parse(workoutApi));
+  //     List<dynamic> decoded = jsonDecode(response.body);
+  //     List<Workout> parsedListWorkout =
+  //         decoded.map((element) => Workout.fromJson(element)).toList();
 
-      setState(() {
-        _items = parsedListWorkout;
-      });
-    } catch (err) {
-      print(err);
-    }
-  }
+  //     setState(() {
+  //       _items = parsedListWorkout;
+  //     });
+  //   } catch (err) {
+  //     print(err);
+  //   }
+  // }
 
   _filterExercicesDisplayList(GrupoMuscular grupoMuscular) {
     print("_filterExercicesDisplayList $grupoMuscular");
@@ -116,9 +131,9 @@ class ApiItemsListState extends State<ApiItemsList> {
               splashColor: Colors.blue,
               splashFactory: InkSplash.splashFactory,
               child: Container(
-                  margin: const EdgeInsets.all(5),
-                  width: 100,
-                  height: 110,
+                  margin: const EdgeInsets.all(2),
+                  width: 90,
+                  height: 100,
                   decoration: BoxDecoration(
                       color: gruposMusculares[i].color,
                       borderRadius: BorderRadius.all(Radius.circular(12))),
@@ -153,10 +168,15 @@ class ApiItemsListState extends State<ApiItemsList> {
   }
 
   Widget _buildRow(int position) {
-    var itemsLocally = _displayItems;
+    List<Workout> itemsLocally = _displayItems;
 
     return ListTile(
         tileColor: _currentColor,
+        trailing: itemsLocally[position].getStatus ?  Icon(Icons.done) : null,
+        onLongPress: (){
+          itemsLocally[position].toggleDone();
+          _makeRender();
+        },
         shape: RoundedRectangleBorder(
           side: BorderSide(
             width: 2,
@@ -165,12 +185,12 @@ class ApiItemsListState extends State<ApiItemsList> {
             borderRadius: BorderRadius.circular(20),
         ),
         title: Text(
-          "${itemsLocally[position].nome}",
+          itemsLocally[position].nome,
           textAlign: TextAlign.left,
           style: TextStyle(
               fontSize: 17, fontFamily: 'Raleway', fontWeight: FontWeight.w700),
         ),
-        subtitle: Text("Grupo: ${itemsLocally[position].grupoMuscular}",
+        subtitle: Text("Grupo: ${itemsLocally[position].grupoMuscular}  ",
             style: _font),
         leading: Padding(
             padding: EdgeInsets.all(0.5),

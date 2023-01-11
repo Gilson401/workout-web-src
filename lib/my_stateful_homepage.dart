@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/workout.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-
 import 'apiItemsList.dart';
-import 'grupo_muscular.dart';
 
 class MyStatefullHomePage extends StatefulWidget {
   const MyStatefullHomePage({super.key, required this.title});
@@ -15,79 +13,42 @@ class MyStatefullHomePage extends StatefulWidget {
 }
 
 class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
-  int _counter = 1;
-  int _columItems = 1;
-
-
-  Workout _seletctedWorkout =
-      Workout(nome: 'Selecione um exercício', grupoMuscular: '');
+  Workout _seletctedWorkout = Workout(
+      nome: 'Selecione um exercício', grupoMuscular: '', orientacoes: []);
 
   final _controller = YoutubePlayerController.fromVideoId(
     videoId: '',
     autoPlay: true,
     params: const YoutubePlayerParams(
       showFullscreenButton: true,
-      mute:true,
-      ),
+      mute: true,
+    ),
   );
 
   void setCurrentWorkout(Workout workout) async {
-   
-
     setState(() {
       _seletctedWorkout = workout;
     });
 
-     print(
-        "VídeoId Carregado. ${_seletctedWorkout.videoId}");
+    print("VídeoId Carregado. ${_seletctedWorkout.videoId}");
 
     _controller.loadVideoById(videoId: workout.videoId);
-  
-     _controller.pauseVideo();
-  }
 
-  void _incrementColumnItems() {
-    setState(() {
-      _columItems++;
-    });
-  }
-
-  void _incrementCounter() {
-    if (_counter < 10) {
-      setState(() {
-        _counter++;
-      });
-    }
-  }
-
-  void _decrementCounter() {
-    if (_counter > 2) {
-      setState(() {
-        _counter--;
-      });
-    }
-  }
-
-  void _resetCounter() {
-    setState(() {
-      _counter = 2;
-    });
+    _controller.pauseVideo();
   }
 
   @override
   void initState() {
     super.initState();
-    print('InitState: Valor inicial de _counter é $_counter');
-
-    setState(() {
-      _counter++;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     var apiItemsList = ApiItemsList(setWorkout: setCurrentWorkout);
-
+    var textStyle = TextStyle(
+        // fontSize: 17,
+        fontFamily: 'Raleway',
+        fontWeight: FontWeight.w700);
 
     return Scaffold(
       appBar: AppBar(
@@ -107,83 +68,74 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
                   apiItemsList,
                   Container(
                     color: Color.fromARGB(255, 255, 255, 255),
-                    height: 300,
+                    height: 350,
                     width: MediaQuery.of(context).size.width,
                     margin: const EdgeInsets.all(2),
                     padding: const EdgeInsets.all(5),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text('Exercício: ${_seletctedWorkout.nome}',
-                              softWrap: true),
-                          Text(_seletctedWorkout.repeticoes, softWrap: true),
-                          Text(_seletctedWorkout.carga, softWrap: true),
-                          if (_seletctedWorkout.image != "")
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
                             SizedBox(
-                              height: 100,
+                              height: 300,
                               width: MediaQuery.of(context).size.width,
-                              child: Image.network(_seletctedWorkout.image),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    'Exercício: ${_seletctedWorkout.nome}',
+                                    softWrap: true,
+                                    style: textStyle,
+                                  ),
+                                  Text(
+                                      "Repetições: ${_seletctedWorkout.repeticoes}",
+                                      softWrap: true),
+                                  Text("Carga: ${_seletctedWorkout.carga}",
+                                      softWrap: true),
+                                  for (var i = 0;
+                                      i < _seletctedWorkout.orientacoes!.length;
+                                      i++)
+                                    Text(_seletctedWorkout.orientacoes![i],
+                                        softWrap: true),
+                                ],
+                              ),
                             ),
-                        ]),
+                            if (_seletctedWorkout.image != "")
+                              SizedBox(
+                                height: 300,
+                                width: MediaQuery.of(context).size.width,
+                                child: Image.network(_seletctedWorkout.image),
+                              ),
+                            if (_seletctedWorkout.videoId != "")
+                              SizedBox(
+                                height: 300,
+                                width: MediaQuery.of(context).size.width,
+                                child: YoutubePlayer(
+                                  controller: _controller,
+                                  aspectRatio: 16 / 9,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 35, 35, 87),
+                                ),
+                              ),
+                          ]),
+                    ),
                   ),
                 ],
               ),
-            
-              if (_seletctedWorkout.videoId != "" )
-                YoutubePlayer(
-                  controller: _controller,
-                  aspectRatio: 16 / 9,
-                  backgroundColor: Color.fromARGB(255, 35, 35, 87),
-                ),
-          ],
+            ],
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   // onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.restore),
-      //   onPressed: () {
-      //     _resetCounter();
-      //   },
-      // ),
       bottomNavigationBar: BottomAppBar(
         elevation: 10,
         color: Colors.white,
         child: IconTheme(
             data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
             child: Row(
-              children: [
-                IconButton(
-                  tooltip: 'decrement',
-                  icon: const Icon(Icons.menu),
-                  onPressed: () {
-                    print('You clicker in Open nav menu $_counter');
-                  },
-                ),
-                IconButton(
-                  tooltip: 'Decrement Counter',
-                  icon: const Icon(Icons.remove_circle_outline),
-                  onPressed: () {
-                    _decrementCounter();
-                  },
-                ),
-                IconButton(
-                  tooltip: 'Decrement Counter',
-                  icon: const Icon(Icons.add_circle_outline),
-                  onPressed: () {
-                    _incrementCounter();
-                  },
-                ),
-                IconButton(
-                  tooltip: 'Add Column Item',
-                  icon: const Icon(Icons.playlist_add_circle),
-                  onPressed: () {
-                    _incrementColumnItems();
-                  },
-                ),
-              ],
+              children: [],
             )),
       ),
     );
