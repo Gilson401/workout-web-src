@@ -1,3 +1,5 @@
+
+
 class Workout {
   String nome;
   String grupoMuscular;
@@ -35,6 +37,7 @@ class Workout {
 
 void toggleDone(){
   _done = !_done;
+  
 }
 
 bool get getStatus {
