@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:vibration/vibration.dart';
 import 'package:hello_flutter/workout.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'app_controller.dart';
 import 'grupo_muscular.dart';
 // import 'file_handler.dart';
-
-// https://www.youtube.com/watch?v=cQbWd2tnfdc&t=2496s
 
 ///Neste exemplo ApiItemsList é o componente filho
 class ApiItemsListState extends State<ApiItemsList> {
@@ -16,22 +16,20 @@ class ApiItemsListState extends State<ApiItemsList> {
         Color.fromARGB(155, 43, 179, 151)),
     GrupoMuscular.color('Bíceps e Costas', 'assets/imgs/dumbbell.PNG',
         Color.fromARGB(155, 248, 252, 35)),
+    GrupoMuscular.color(
+        'Extra', 'assets/imgs/leg.png', Color.fromARGB(155, 223, 220, 220)),
     GrupoMuscular('Ombros', 'assets/imgs/ombros.png'),
     GrupoMuscular.color(
         'Pernas', 'assets/imgs/leg.png', Color.fromARGB(155, 243, 79, 51)),
-    GrupoMuscular.color(
-        'Extra', 'assets/imgs/leg.png', Color.fromARGB(155, 223, 220, 220)),
   ];
 
-
   _onListTileClick(workout) {
-    //Abaixo vc invoca a função recebida como parâmetro
     widget.setWorkout(workout);
   }
 
-var forceRender = 1;
+  bool _canVibrate = false;
+  var forceRender = 1;
   var _items = [];
-  //List _itemsLocal = [];
 
   List<Workout> _displayItems = [];
 
@@ -41,26 +39,31 @@ var forceRender = 1;
     fontSize: 15.0,
   );
 
-void _makeRender(){
-  setState(() {
-    forceRender = forceRender++;
-  });
-}
-
   @override
   void initState() {
     super.initState();
     // _loadData();
     _loadDataLocal();
+    _setVibrateStatus();
   }
 
+  Future<void> _setVibrateStatus() async {
+    bool? canVibrate = await Vibration.hasVibrator();
+
+    if (canVibrate != null && canVibrate) {
+      setState(() {
+        _canVibrate = true;
+      });
+    }
+  }
 
   Future<void> _loadDataLocal() async {
     //lê o json
-    final String response = await rootBundle.loadString('assets/json/series.json');
-    
+    final String response =
+        await rootBundle.loadString('assets/json/series.json');
+
     // FileHandler  frdl = FileHandler();
-    
+
     // final String response = await frdl.readFile();
 
     //parseia o json para _JsonMap ou _JsonList
@@ -74,7 +77,6 @@ void _makeRender(){
         exerciciosFromJson.map((element) => Workout.fromJson(element)).toList();
 
     setState(() {
-      // _itemsLocal = parsedListWorkout;
       _items = parsedListWorkout;
       _listWorkout = parsedListWorkout;
       _displayItems = parsedListWorkout;
@@ -172,17 +174,17 @@ void _makeRender(){
 
     return ListTile(
         tileColor: _currentColor,
-        trailing: itemsLocally[position].getStatus ?  Icon(Icons.done) : null,
-        onLongPress: (){
+        trailing: itemsLocally[position].getStatus ? Icon(Icons.done) : null,
+        onLongPress: () {
           itemsLocally[position].toggleDone();
-          _makeRender();
+          if (_canVibrate) {
+            Vibration.vibrate();
+          }
+          AppController.instance.increaseRenderCount();
         },
         shape: RoundedRectangleBorder(
-          side: BorderSide(
-            width: 2,
-            color: Color.fromARGB(255, 255, 255, 255)
-            ),
-            borderRadius: BorderRadius.circular(20),
+          side: BorderSide(width: 2, color: Color.fromARGB(255, 255, 255, 255)),
+          borderRadius: BorderRadius.circular(20),
         ),
         title: Text(
           itemsLocally[position].nome,
@@ -207,12 +209,11 @@ void _makeRender(){
     return Column(
       children: [
         Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
+            width: double.infinity,
+            decoration: BoxDecoration(
               color: Colors.white,
             ),
-          child: Center(child: groupMusclesButtons())
-        ),
+            child: Center(child: groupMusclesButtons())),
         SizedBox(height: 300, child: itemsListViewBulder())
       ],
     );

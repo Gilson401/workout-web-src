@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hello_flutter/workout.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'apiItemsList.dart';
+import 'clockTime_page.dart';
 
 class MyStatefullHomePage extends StatefulWidget {
   const MyStatefullHomePage({super.key, required this.title});
@@ -81,33 +82,51 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
                             SizedBox(
                               height: 300,
                               width: MediaQuery.of(context).size.width,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    'Exercício: ${_seletctedWorkout.nome}',
-                                    softWrap: true,
-                                    style: textStyle,
-                                  ),
-                                  Text(
-                                      "Repetições: ${_seletctedWorkout.repeticoes}",
-                                      softWrap: true),
-                                  Text("Carga: ${_seletctedWorkout.carga}",
-                                      softWrap: true),
-                                  for (var i = 0;
-                                      i < _seletctedWorkout.orientacoes!.length;
-                                      i++)
-                                    Text(_seletctedWorkout.orientacoes![i],
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      'Exercício: ${_seletctedWorkout.nome}',
+                                      softWrap: true,
+                                      style: textStyle,
+                                    ),
+                                    Text(
+                                        "Repetições: ${_seletctedWorkout.repeticoes}",
                                         softWrap: true),
-                                ],
+                                    Text("Carga: ${_seletctedWorkout.carga}",
+                                        softWrap: true),
+                                    for (var i = 0;
+                                        i < _seletctedWorkout.orientacoes!.length;
+                                        i++)
+                                      Text(_seletctedWorkout.orientacoes![i],
+                                          softWrap: true),
+                                  ],
+                                ),
                               ),
                             ),
                             if (_seletctedWorkout.image != "")
                               SizedBox(
                                 height: 300,
                                 width: MediaQuery.of(context).size.width,
-                                child: Image.network(_seletctedWorkout.image),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 30,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Text(
+                                      'Exercício: ${_seletctedWorkout.nome}',
+                                      softWrap: true,
+                                      style: textStyle,
+                                  ),
+                                    ),
+                                    SizedBox(
+                                      height: 270,
+                                      child: Image.network(_seletctedWorkout.image)),
+                                  ],
+                                ),
                               ),
                             if (_seletctedWorkout.videoId != "")
                               SizedBox(
@@ -135,7 +154,16 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
         child: IconTheme(
             data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
             child: Row(
-              children: [],
+              children: [IconButton(
+                  tooltip: 'Timer',
+                  icon: const Icon(Icons.timer),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => ClockTimerPage()),
+                    );
+                    print('You clicked in menu inferior');
+                  },
+                ),],
             )),
       ),
     );
