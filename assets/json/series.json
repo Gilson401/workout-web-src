@@ -2,6 +2,7 @@
     "exercicios": [
         {
             "grupoMuscular": "Peito e Tríceps",
+            "id": 1,
             "nome": "TRÍCEPS UNIL.CRUZADO",
             "repeticoes": "3 X 20",
             "carga": "Carga Máxima",
@@ -11,6 +12,7 @@
         },
         {
             "grupoMuscular": "Peito e Tríceps",
+            "id": 2,
             "nome": "TRÍCEPS FRANCÊS CORDA",
             "repeticoes": "3 X 15",
             "carga": "Carga Máxima",
@@ -20,6 +22,7 @@
         },
         {
             "grupoMuscular": "Peito e Tríceps",
+            "id": 3,
             "nome": "TRÍCEPS PRONADO + SUPINADO",
             "repeticoes": "3 X 10 pronado + 10 supinado",
             "carga": "aumentando aem cada série",
@@ -29,6 +32,7 @@
         },
         {
             "grupoMuscular": "Peito e Tríceps",
+            "id": 4,
             "nome": "TRÍCEPS TESTA 2 PEGADAS",
             "repeticoes": "3x12",
             "carga": "aumentar em cada série",
@@ -40,6 +44,7 @@
         },
         {
             "grupoMuscular": "Peito e Tríceps",
+            "id": 5,
             "nome": "PEITO NO CROSS",
             "repeticoes": "3 X 6² + 6",
             "carga": "Aumentar a carga entre as repetições",
@@ -51,6 +56,7 @@
         },
         {
             "grupoMuscular": "Peito e Tríceps",
+            "id": 6,
             "nome": "SUPINO 45°",
             "repeticoes": "3x12",
             "carga": "Carga máxima",
@@ -60,6 +66,7 @@
         },
         {
             "grupoMuscular": "Peito e Tríceps",
+            "id": 7,
             "nome": "SUPINO VERTICAL",
             "repeticoes": "3 X 6²+6",
             "carga": "Aumentar a carga entre as repetições",
@@ -71,6 +78,7 @@
         },
         {
             "grupoMuscular": "Peito e Tríceps",
+            "id": 8,
             "nome": "SUPINO RETO",
             "repeticoes": "1X15 1X12 1X10 1X8 1X6",
             "carga": "Aumente a carga entre as séries",
@@ -81,6 +89,7 @@
         },
         {
             "grupoMuscular": "Peito e Tríceps",
+            "id": 9,
             "nome": "CRUCIFIXO HORIZONTAL NEUTRO",
             "repeticoes": "3 X 10",
             "carga": "máximo",
@@ -91,7 +100,8 @@
 
 
         {
-            "grupoMuscular": "Anterior Perna",
+            "grupoMuscular": "Pernas Anterior",
+            "id": 10,
             "nome": "AGACH.SQUAT",
             "repeticoes": "4 X 10",
             "carga": "aumentar",
@@ -101,7 +111,8 @@
         },
 
         {
-            "grupoMuscular": "Anterior Perna",
+            "grupoMuscular": "Pernas Anterior",
+            "id": 11,
             "nome": "CADEIRA EXTENSORA",
             "repeticoes": "4 X 10² + 10",
             "carga": "aumentar",
@@ -111,7 +122,8 @@
         },
 
         {
-            "grupoMuscular": "Anterior Perna",
+            "grupoMuscular": "Pernas Anterior",
+            "id": 12,
             "nome": "HACK MACHINE",
             "repeticoes": "4 X (10 aberto + 10 junto)",
             "carga": "aumentar",
@@ -122,7 +134,8 @@
 
 
         {
-            "grupoMuscular": "Anterior Perna",
+            "grupoMuscular": "Pernas Anterior",
+            "id": 13,
             "nome": "LEG 45",
             "repeticoes": "4 X (10+10s + 10+10s + 10)",
             "carga": "Aumentar com cautela",
@@ -132,7 +145,8 @@
         },
 
         {
-            "grupoMuscular": "Anterior Perna",
+            "grupoMuscular": "Pernas Anterior",
+            "id": 14,
             "nome": "PASSADA",
             "repeticoes": "3 x (10 ida + 10 volta)",
             "carga": "Conforme suportar",
@@ -142,7 +156,8 @@
         },
 
         {
-            "grupoMuscular": "Anterior Perna",
+            "grupoMuscular": "Pernas Anterior",
+            "id": 15,
             "nome": "LEG HORIZONTAL",
             "repeticoes": "4X10",
             "carga": "Aumentar",
@@ -152,7 +167,8 @@
         },
 
         {
-            "grupoMuscular": "Anterior Perna",
+            "grupoMuscular": "Pernas Anterior",
+            "id": 16,
             "nome": "CADEIRA ADUTORA",
             "repeticoes": "4 x 20",
             "carga": "Aumenta em cada série",
@@ -164,7 +180,8 @@
 
 
         {
-            "grupoMuscular": "Anterior Perna",
+            "grupoMuscular": "Pernas Anterior",
+            "id": 17,
             "nome": "AGACHAMENTO SUMO",
             "repeticoes": "3 x 20",
             "carga": "Conforme suportar",
@@ -178,7 +195,8 @@
         },
 
         {
-            "grupoMuscular": "Anterior Perna",
+            "grupoMuscular": "Pernas Anterior",
+            "id": 18,
             "nome": "CADEIRA EXTENSORA UNILATERAL",
             "repeticoes": "4 x 10",
             "carga": "Aumenta em cada série",
@@ -189,16 +207,18 @@
 
 
         {
-            "grupoMuscular": "Pernas",
+            "grupoMuscular": "Pernas Posterior",
+            "id": 19,
             "nome": "CADEIRA FLEXORA",
             "repeticoes": "4 X 10 c + 10",
             "carga": "aumentar",
-            "orientacoes": ["Treino 5!"],
+            "orientacoes": ["É a que força fechando"],
             "videoId": "JTr9Ud6p8h8",
             "image": "https://user-images.githubusercontent.com/66516553/210381904-e4da4002-73ed-4df8-976e-0d7216824bb2.png"
         },
         {
-            "grupoMuscular": "Pernas",
+            "grupoMuscular": "Pernas Posterior",
+            "id": 20,
             "nome": "LEG 90",
             "repeticoes": " 4X 10(aber)+10(fech)",
             "carga": "aumentar",
@@ -210,7 +230,8 @@
             "image": "https://user-images.githubusercontent.com/66516553/210384122-f0c93768-186e-4489-a72d-c0c76cd97c87.png"
         },
         {
-            "grupoMuscular": "Pernas",
+            "grupoMuscular": "Pernas Posterior",
+            "id": 21,
             "nome": "MESA FLEXORA",
             "repeticoes": " 4X 10",
             "carga": "aumentar",
@@ -223,7 +244,8 @@
         },
 
         {
-            "grupoMuscular": "Pernas",
+            "grupoMuscular": "Pernas Posterior",
+            "id": 22,
             "nome": "AFUNDO SMITH",
             "repeticoes": "4X 10",
             "carga": "aumentar",
@@ -235,7 +257,8 @@
         },
 
         {
-            "grupoMuscular": "Pernas",
+            "grupoMuscular": "Pernas Posterior",
+            "id": 23,
             "nome": "FLEXAO VERTICAL",
             "repeticoes": "4X10+10'' ",
             "carga": "Conforme suportar",
@@ -247,7 +270,8 @@
         },
 
         {
-            "grupoMuscular": "Pernas",
+            "grupoMuscular": "Pernas Posterior",
+            "id": 24,
             "nome": "PANTURRILHA VERTICAL",
             "repeticoes": "4X20 (2t)",
             "carga": "Aumentar a cada série",
@@ -261,7 +285,8 @@
 
 
         {
-            "grupoMuscular": "Pernas",
+            "grupoMuscular": "Pernas Posterior",
+            "id": 25,
             "nome": "CADEIRA ABDUTORA",
             "repeticoes": "4X20",
             "carga": "Aumentar a cada série",
@@ -274,7 +299,8 @@
         },
 
         {
-            "grupoMuscular": "Pernas",
+            "grupoMuscular": "Pernas Posterior",
+            "id": 26,
             "nome": "STIFF BARRA",
             "repeticoes": "4X15",
             "carga": "Aumentar a cada série",
@@ -285,7 +311,8 @@
             "image": "https://user-images.githubusercontent.com/66516553/210388051-e15c7fff-471c-4536-ba98-afaa8b56322f.png"
         },
         {
-            "grupoMuscular": "Pernas",
+            "grupoMuscular": "Pernas Posterior",
+            "id": 27,
             "nome": "LEVANTAMENTO TERRA",
             "repeticoes": "4X10",
             "carga": "Aumentar a cada série",
@@ -297,6 +324,7 @@
         },
         {
             "grupoMuscular": "Bíceps e Costas",
+            "id": 28,
             "nome": "PUXADA TRIANGULO",
             "repeticoes": "1X15 1X12 1X10 1X8 1X6",
             "carga": "aumentar",
@@ -310,6 +338,7 @@
         },
         {
             "grupoMuscular": "Bíceps e Costas",
+            "id": 29,
             "nome": "REMADA SENTADO  NEUTRO",
             "repeticoes": "3X 6²+ 6",
             "carga": "Aumentar",
@@ -324,6 +353,7 @@
         },
         {
             "grupoMuscular": "Bíceps e Costas",
+            "id": 30,
             "nome": "PUXADA ARTICULADA",
             "repeticoes": "3 x 10",
             "carga": "Aumenta em cada série",
@@ -338,6 +368,7 @@
         },
         {
             "grupoMuscular": "Bíceps e Costas",
+            "id": 31,
             "nome": "PULL DOWN + PUXADA SUPINADA",
             "repeticoes": "3X 10+12",
             "carga": "Subindo",
@@ -351,6 +382,7 @@
         },
         {
             "grupoMuscular": "Bíceps e Costas",
+            "id": 32,
             "nome": "BÍCEPS ROBÔ UNIL",
             "repeticoes": "3 X 20",
             "carga": "Conforme suportar",
@@ -360,6 +392,7 @@
         },
         {
             "grupoMuscular": "Bíceps e Costas",
+            "id": 33,
             "nome": "BÍCEPS 21",
             "repeticoes": "3 vezes",
             "carga": "Conforme suportar",
@@ -375,6 +408,7 @@
         },
         {
             "grupoMuscular": "Bíceps e Costas",
+            "id": 34,
             "nome": "BÍCEPS MARTELO",
             "repeticoes": "3X10",
             "carga": "aumentando aem cada série",
@@ -389,6 +423,7 @@
         },
         {
             "grupoMuscular": "Bíceps e Costas",
+            "id": 35,
             "nome": "BÍCEPS SCOT UNIL",
             "repeticoes": "3 x 10",
             "carga": "aumentando aem cada série",
@@ -400,6 +435,7 @@
         },
         {
             "grupoMuscular": "Bíceps e Costas",
+            "id": 36,
             "nome": "BÍCEPS CROSS ALTO",
             "repeticoes": "3 x 8 ",
             "carga": "Aumenta em cada série",
@@ -414,6 +450,7 @@
         },
         {
             "grupoMuscular": "Ombros",
+            "id": 37,
             "nome": "DESENVOL.ARTICULADO 2pegadas",
             "repeticoes": "3 X 10",
             "carga": "sem exagerar",
@@ -427,6 +464,7 @@
         },
         {
             "grupoMuscular": "Ombros",
+            "id": 38,
             "nome": "DESENV.ARNOLD",
             "repeticoes": "1X12 1X10 1X8 1X6",
             "carga": "AUMENTAR o peso entre as repetições",
@@ -439,6 +477,7 @@
         },
         {
             "grupoMuscular": "Ombros",
+            "id": 39,
             "nome": "ELEVAÇÃO LATERAL com drop-set",
             "repeticoes": "3X 8+10+12",
             "carga": "DIMINUIR o peso entre as falhas",
@@ -455,6 +494,7 @@
         },
         {
             "grupoMuscular": "Ombros",
+            "id": 40,
             "nome": "ELEVA. LATERAL CROSS",
             "repeticoes": "3 X 10",
             "carga": "Aumentar a carga entre as repetições",
@@ -469,6 +509,7 @@
         },
         {
             "grupoMuscular": "Ombros",
+            "id": 41,
             "nome": "ELEVA.LATERAL ARTICULADA",
             "repeticoes": "3 X 6²+6",
             "carga": "Conforme suportar - Isomeria",
@@ -481,6 +522,7 @@
         },
         {
             "grupoMuscular": "Ombros",
+            "id": 42,
             "nome": "ELEVAÇÃO FRONTAL ALTERNADA",
             "repeticoes": "3 X 10",
             "carga": "AUMENTAR o peso entre as repetições",
@@ -495,6 +537,7 @@
         },
         {
             "grupoMuscular": "Ombros",
+            "id": 43,
             "nome": "ELEVA.SUPINADA BARRA",
             "repeticoes": "3 X 10",
             "carga": "AUMENTAR o peso entre as repetições",
@@ -508,6 +551,7 @@
         },
         {
             "grupoMuscular": "Ombros",
+            "id": 44,
             "nome": "REMADA  ALTA",
             "repeticoes": "3X 10+10+10",
             "carga": "Aumenta em cada bloco de 10",
@@ -520,6 +564,7 @@
         },
         {
             "grupoMuscular": "Ombros",
+            "id": 45,
             "nome": "ENCOL. OMBROS CROSS",
             "repeticoes": "3 X 20",
             "carga": "Aumentar a cada série",
@@ -531,6 +576,7 @@
         },
         {
             "grupoMuscular": "Ombros",
+            "id": 46,
             "nome": "ELEV. LATERAL NEUTRA CROSS",
             "repeticoes": "3 X 10",
             "carga": "Conforme suportar",
