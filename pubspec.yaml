@@ -42,6 +42,8 @@ dependencies:
   flutter_native_splash: ^2.2.16
   flutter_launcher_icons: ^0.11.0
   vibration: ^1.7.6
+  percent_indicator: ^4.2.2
+  shared_preferences: ^2.0.8
 
 flutter_native_splash:
   color: "#3F51B5"
