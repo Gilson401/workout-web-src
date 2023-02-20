@@ -17,7 +17,7 @@ class ApiItemsListState extends State<ApiItemsList> {
     GrupoMuscular.color('Bíceps e Costas', 'assets/imgs/dumbbell.PNG',
         Color.fromARGB(155, 248, 252, 35)),
     GrupoMuscular.color(
-        'Extra', 'assets/imgs/leg.png', Color.fromARGB(155, 223, 220, 220)),
+        'Anterior Perna', 'assets/imgs/leg.png', Color.fromARGB(155, 223, 220, 220)),
     GrupoMuscular('Ombros', 'assets/imgs/ombros.png'),
     GrupoMuscular.color(
         'Pernas', 'assets/imgs/leg.png', Color.fromARGB(155, 243, 79, 51)),
@@ -174,13 +174,14 @@ class ApiItemsListState extends State<ApiItemsList> {
 
     return ListTile(
         tileColor: _currentColor,
+        selectedColor: Color.fromARGB(155, 2, 55, 99),
         trailing: itemsLocally[position].getStatus ? Icon(Icons.done) : null,
         onLongPress: () {
           itemsLocally[position].toggleDone();
           if (_canVibrate) {
-            Vibration.vibrate();
+            Vibration.vibrate(duration: 500);
           }
-          AppController.instance.increaseRenderCount();
+          AppController.instance.notifyAll();
         },
         shape: RoundedRectangleBorder(
           side: BorderSide(width: 2, color: Color.fromARGB(255, 255, 255, 255)),
