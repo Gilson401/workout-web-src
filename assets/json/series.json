@@ -32,9 +32,11 @@
             "nome": "TRÍCEPS TESTA 2 PEGADAS",
             "repeticoes": "3x12",
             "carga": "aumentar em cada série",
-            "orientacoes": ["Duas pegadas é com a alça de pano ou de metal"],
-            "videoId": "oqob5MHbzBc",
-            "image": "https://user-images.githubusercontent.com/66516553/209980285-5f223d74-9f15-4dd3-82f5-1fe22f519f95.png"
+            "orientacoes": ["Fazer no cross", 
+            "Duas pegadas é com a alça de pano ou de metal"
+        ],
+            "videoId": "hpxi7fAwCCI",
+            "image": "https://user-images.githubusercontent.com/66516553/213179443-08e2dc90-1f43-4961-904b-49c78c879d38.png"
         },
         {
             "grupoMuscular": "Peito e Tríceps",
@@ -82,14 +84,14 @@
             "nome": "CRUCIFIXO HORIZONTAL NEUTRO",
             "repeticoes": "3 X 10",
             "carga": "máximo",
-            "orientacoes": [],
-            "videoId": "O_FwRxa-hJo",
-            "image": "https://user-images.githubusercontent.com/66516553/209474109-60ec9b0d-2ea0-494d-a644-f103b2b7335f.png"
+            "orientacoes": ["Deitado no banco reto"],
+            "videoId": "NI3tAZ9OAag",
+            "image": "https://user-images.githubusercontent.com/66516553/213181099-a0f686a9-4e22-4514-8381-f2b039cec5be.png"
         },
 
 
         {
-            "grupoMuscular": "Extra",
+            "grupoMuscular": "Anterior Perna",
             "nome": "AGACH.SQUAT",
             "repeticoes": "4 X 10",
             "carga": "aumentar",
@@ -99,17 +101,17 @@
         },
 
         {
-            "grupoMuscular": "Extra",
+            "grupoMuscular": "Anterior Perna",
             "nome": "CADEIRA EXTENSORA",
             "repeticoes": "4 X 10² + 10",
             "carga": "aumentar",
-            "orientacoes": ["Cada série é 10 segurando 2 seg no pico mais 10 normais."],
+            "orientacoes": ["Cada série é 10 segurando 2 seg no pico mais 10 normais.", "Mantenha o quadril sempre encaixado no banco"],
             "videoId": "1f1DjMr68hY",
             "image": "https://user-images.githubusercontent.com/66516553/210868633-253f0abf-8375-42f4-b63b-ab04023321c5.png"
         },
 
         {
-            "grupoMuscular": "Extra",
+            "grupoMuscular": "Anterior Perna",
             "nome": "HACK MACHINE",
             "repeticoes": "4 X (10 aberto + 10 junto)",
             "carga": "aumentar",
@@ -120,7 +122,7 @@
 
 
         {
-            "grupoMuscular": "Extra",
+            "grupoMuscular": "Anterior Perna",
             "nome": "LEG 45",
             "repeticoes": "4 X (10+10s + 10+10s + 10)",
             "carga": "Aumentar com cautela",
@@ -130,7 +132,7 @@
         },
 
         {
-            "grupoMuscular": "Extra",
+            "grupoMuscular": "Anterior Perna",
             "nome": "PASSADA",
             "repeticoes": "3 x (10 ida + 10 volta)",
             "carga": "Conforme suportar",
@@ -140,7 +142,7 @@
         },
 
         {
-            "grupoMuscular": "Extra",
+            "grupoMuscular": "Anterior Perna",
             "nome": "LEG HORIZONTAL",
             "repeticoes": "4X10",
             "carga": "Aumentar",
@@ -150,7 +152,7 @@
         },
 
         {
-            "grupoMuscular": "Extra",
+            "grupoMuscular": "Anterior Perna",
             "nome": "CADEIRA ADUTORA",
             "repeticoes": "4 x 20",
             "carga": "Aumenta em cada série",
@@ -162,7 +164,7 @@
 
 
         {
-            "grupoMuscular": "Extra",
+            "grupoMuscular": "Anterior Perna",
             "nome": "AGACHAMENTO SUMO",
             "repeticoes": "3 x 20",
             "carga": "Conforme suportar",
@@ -176,11 +178,11 @@
         },
 
         {
-            "grupoMuscular": "Extra",
+            "grupoMuscular": "Anterior Perna",
             "nome": "CADEIRA EXTENSORA UNILATERAL",
             "repeticoes": "4 x 10",
             "carga": "Aumenta em cada série",
-            "orientacoes": ["Fazer uma perna de cada vez"],
+            "orientacoes": ["Fazer uma perna de cada vez", "Mantenha o quadril encaixado no banco."],
             "videoId": "7HcK7fmYJP0",
             "image": "https://user-images.githubusercontent.com/66516553/210868633-253f0abf-8375-42f4-b63b-ab04023321c5.png"
         },
@@ -298,7 +300,11 @@
             "nome": "PUXADA TRIANGULO",
             "repeticoes": "1X15 1X12 1X10 1X8 1X6",
             "carga": "aumentar",
-            "orientacoes": [],
+            "orientacoes": [
+                "Incline levemente para trás enquanto puxa",
+                "Procure manter o ângulo do cotovelo em 90° todo o movimento",
+                "O triâgulo deve ficar afastado do rosto durante o movimento."
+            ],
             "videoId": "qW3-gblri0g",
             "image": "https://user-images.githubusercontent.com/66516553/209880520-5abf2e1d-b7dc-4b33-a508-f55e1b20bdee.png"
         },
@@ -307,8 +313,12 @@
             "nome": "REMADA SENTADO  NEUTRO",
             "repeticoes": "3X 6²+ 6",
             "carga": "Aumentar",
-            "orientacoes": ["Faz 6 segurando 2seg no pico + 6 comuns", 
-            "Usar triângulo ou pegadores de mão na vertical"],
+            "orientacoes": [
+                "Avalie fazer pegada pronada ao invés de neutra",
+                "Faz 6 segurando 2seg no pico + 6 comuns", 
+                "Jogue o corpo para frente no início buscando manter o cotovelo em 90°",
+                "Usar triângulo ou pegadores de mão na vertical"
+            ],
             "videoId": "9AzRwQNl7uk",
             "image": "https://user-images.githubusercontent.com/66516553/210891073-e7f660d6-a18d-40b4-8eb7-7c13535d2754.png"
         },
@@ -332,9 +342,9 @@
             "repeticoes": "3X 10+12",
             "carga": "Subindo",
             "orientacoes": [
-                "Pull down é em pé, curvado puxando para baixo",
-                "Pull down pode ser barra longa, curta ou corda",
-                "Puxada supinada é sentado com a palma da mão virada para trás."
+                "Pull down é em pé, curvado puxando para baixo com barra longa, curta ou corda",
+                "Puxada supinada é sentado com a palma da mão virada para trás.",
+                "Incline levemente as costas para trás na puxada."
         ],
             "videoId": "EG1ua8lDQJA",
             "image": "https://user-images.githubusercontent.com/66516553/210895166-7ad1ac60-bfc1-4b16-8a1a-72f8b949b432.png"
@@ -408,10 +418,9 @@
             "repeticoes": "3 X 10",
             "carga": "sem exagerar",
             "orientacoes": [
-                "Regular banco para joelho fazer 90 graus",
-                "Pés na largura do quadril",
-                "Curvatura da lombar levemente arqueada.",
-                "Apoiar as costas no encosto do banco."
+                "Não estender 100% o braço.",
+                "Não contrair ou subir o trapézio",
+                "Costas completamente no encosto do banco."
             ],
             "videoId": "k0gD4uBjayA",
             "image": "https://user-images.githubusercontent.com/66516553/209880346-a25bc0b9-f1be-4961-8420-f2a75112993e.png"
