@@ -6,9 +6,7 @@ import 'package:hello_flutter/workout.dart';
 import 'dart:convert';
 import 'app_controller.dart';
 import 'grupo_muscular.dart';
-// import 'file_handler.dart';
 
-///Neste exemplo ApiItemsList é o componente filho
 class ApiItemsListState extends State<ApiItemsList> {
   dynamic _currentColor = Color.fromARGB(0, 255, 255, 255);
   List<GrupoMuscular> gruposMusculares = [
@@ -17,10 +15,10 @@ class ApiItemsListState extends State<ApiItemsList> {
     GrupoMuscular.color('Bíceps e Costas', 'assets/imgs/dumbbell.PNG',
         Color.fromARGB(155, 248, 252, 35)),
     GrupoMuscular.color(
-        'Anterior Perna', 'assets/imgs/leg.png', Color.fromARGB(155, 223, 220, 220)),
+        'Pernas Anterior', 'assets/imgs/leg.png', Color.fromARGB(155, 223, 220, 220)),
     GrupoMuscular('Ombros', 'assets/imgs/ombros.png'),
     GrupoMuscular.color(
-        'Pernas', 'assets/imgs/leg.png', Color.fromARGB(155, 243, 79, 51)),
+        'Pernas Posterior', 'assets/imgs/leg.png', Color.fromARGB(155, 243, 79, 51)),
   ];
 
   _onListTileClick(workout) {
@@ -42,7 +40,6 @@ class ApiItemsListState extends State<ApiItemsList> {
   @override
   void initState() {
     super.initState();
-    // _loadData();
     _loadDataLocal();
     _setVibrateStatus();
   }
