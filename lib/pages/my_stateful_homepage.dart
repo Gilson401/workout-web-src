@@ -20,9 +20,10 @@ class MyStatefullHomePage extends StatefulWidget {
 
 class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
   Workout _seletctedWorkout = Workout(
-      nome: 'Selecione um exercício', grupoMuscular: '', orientacoes: [], id: 0);
-
-
+      nome: 'Selecione um exercício',
+      grupoMuscular: '',
+      orientacoes: [],
+      id: 0);
 
   final _controller = YoutubePlayerController.fromVideoId(
     videoId: '',
@@ -66,9 +67,8 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
   @override
   Widget build(BuildContext context) {
     var apiItemsList = ApiItemsList(setWorkout: setCurrentWorkout);
-    var textStyle = TextStyle(
-        fontFamily: 'Raleway',
-        fontWeight: FontWeight.w700);
+    var textStyle =
+        TextStyle(fontFamily: 'Raleway', fontWeight: FontWeight.w700);
 
     return Scaffold(
       appBar: AppBar(
@@ -99,23 +99,27 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             if (_seletctedWorkout.grupoMuscular == "")
-SizedBox(
-                              height: 300,
-                              width: MediaQuery.of(context).size.width,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Selecione um exercício."),
+                              SizedBox(
+                                height: 300,
+                                width: MediaQuery.of(context).size.width,
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("Selecione um exercício."),
+                                  ),
+                                ),
                               ),
-                            ),
                             if (_seletctedWorkout.grupoMuscular != "")
-                            SizedBox(
-                              height: 300,
-                              width: MediaQuery.of(context).size.width,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: WorkoutDisplayer(seletctedWorkout: _seletctedWorkout, textStyle: textStyle),
+                              SizedBox(
+                                height: 300,
+                                width: MediaQuery.of(context).size.width,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: WorkoutDisplayer(
+                                      seletctedWorkout: _seletctedWorkout,
+                                      textStyle: textStyle),
+                                ),
                               ),
-                            ),
                             if (_seletctedWorkout.image != "")
                               SizedBox(
                                 height: 300,
@@ -178,11 +182,9 @@ SizedBox(
                 TimerButton(timerLimitInSeconds: 60, label: '1 min'),
                 TimerButton(timerLimitInSeconds: 90, label: '1.5 min'),
                 TimerButton(timerLimitInSeconds: 120, label: '2 min'),
-                
               ],
             )),
       ),
     );
   }
 }
-
