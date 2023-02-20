@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MaterialApp(
             title: 'Home Workout App',
+            debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primarySwatch: Colors.cyan,
               backgroundColor: Color.fromARGB(121, 247, 247, 247),
