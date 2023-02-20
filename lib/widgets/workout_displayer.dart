@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hello_flutter/utils/local_storage.dart';
 import 'package:hello_flutter/utils/workout.dart';
 
-
 import '../di/inject.dart';
 
 class WorkoutDisplayer extends StatefulWidget {
@@ -27,7 +26,7 @@ class _WorkoutDisplayerState extends State<WorkoutDisplayer> {
 
   final _focusNode = FocusNode();
 
-    @override
+  @override
   void dispose() {
     _focusNode.dispose();
     super.dispose();
@@ -56,8 +55,7 @@ class _WorkoutDisplayerState extends State<WorkoutDisplayer> {
   }
 
   Future<void> _showModal(BuildContext context) async {
-    
-   await showModalBottomSheet(
+    await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (BuildContext context) {
@@ -115,11 +113,9 @@ class _WorkoutDisplayerState extends State<WorkoutDisplayer> {
           ),
         );
       },
-    ).then((value){
+    ).then((value) {
       _focusNode.requestFocus();
-      });
-
-
+    });
   }
 
   @override
@@ -138,24 +134,29 @@ class _WorkoutDisplayerState extends State<WorkoutDisplayer> {
         for (var i = 0; i < widget._seletctedWorkout.orientacoes!.length; i++)
           Text(widget._seletctedWorkout.orientacoes![i], softWrap: true),
         Text("Carga obs.: ${widget._seletctedWorkout.carga}", softWrap: true),
-        Row(
-          children: [
-            Flexible(
-              // flex: 2,
-              child: ElevatedButton(
+        DecoratedBox(
+          decoration: BoxDecoration(
+            color: Colors.blue.shade100,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(_temporaryCarga ?? "", softWrap: true),
+                ),
+                SizedBox(width: 5),
+                IconButton(
+                  icon: const Icon(Icons.edit),
                   onPressed: () async {
                     await _showModal(context);
-
                     _focusNode.requestFocus();
-                    
                   },
-                  child: Text('Carga')),
+                ),
+              ],
             ),
-            SizedBox(width: 5),
-            Expanded(
-              child: Text(_temporaryCarga ?? "", softWrap: true),
-            ),
-          ],
+          ),
         ),
       ],
     );
