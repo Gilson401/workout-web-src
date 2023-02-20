@@ -1,6 +1,9 @@
+// ignore_for_file: file_names
+
 import 'dart:async';
-import 'app_controller.dart';
+
 import 'package:flutter/material.dart';
+import 'package:hello_flutter/utils/app_controller.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 enum PercentDisplaMode {

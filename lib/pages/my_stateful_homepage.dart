@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/timerPeriodic.dart';
-import 'package:hello_flutter/timer_button.dart';
-import 'package:hello_flutter/workout.dart';
+import 'package:hello_flutter/utils/timerPeriodic.dart';
+import 'package:hello_flutter/utils/workout.dart';
+
+import 'package:hello_flutter/widgets/timer_button.dart';
+
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'apiItemsList.dart';
-import 'clockTime_page.dart';
-import 'widgets/workout_displayer.dart';
+import '../widgets/apiItemsList.dart';
+import '../widgets/clockTime_page.dart';
+import '../widgets/workout_displayer.dart';
 
 class MyStatefullHomePage extends StatefulWidget {
   const MyStatefullHomePage({super.key, required this.title});
@@ -96,6 +98,16 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+                            if (_seletctedWorkout.grupoMuscular == "")
+SizedBox(
+                              height: 300,
+                              width: MediaQuery.of(context).size.width,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text("Selecione um exercício."),
+                              ),
+                            ),
+                            if (_seletctedWorkout.grupoMuscular != "")
                             SizedBox(
                               height: 300,
                               width: MediaQuery.of(context).size.width,

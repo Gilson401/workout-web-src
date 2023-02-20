@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/local_storage.dart';
-import 'package:hello_flutter/workout.dart';
+import 'package:hello_flutter/utils/local_storage.dart';
+import 'package:hello_flutter/utils/workout.dart';
+
 
 import '../di/inject.dart';
 

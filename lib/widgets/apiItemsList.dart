@@ -1,11 +1,14 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hello_flutter/utils/app_controller.dart';
+import 'package:hello_flutter/utils/grupo_muscular.dart';
+import 'package:hello_flutter/utils/workout.dart';
 import 'package:vibration/vibration.dart';
-import 'package:hello_flutter/workout.dart';
+
 // import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'app_controller.dart';
-import 'grupo_muscular.dart';
+
 
 class ApiItemsListState extends State<ApiItemsList> {
   dynamic _currentColor = Color.fromARGB(0, 255, 255, 255);

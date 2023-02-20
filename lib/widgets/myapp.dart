@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'app_controller.dart';
+import 'package:hello_flutter/utils/app_controller.dart';
+
 // import 'home_controller.dart';
-import 'my_stateful_homepage.dart';
+import '../pages/my_stateful_homepage.dart';
 // import 'stateless_homepage.dart';
 
 class MyApp extends StatelessWidget {
