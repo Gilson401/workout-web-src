@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/app_controller.dart';
 import 'package:hello_flutter/timerPeriodic.dart';
 import 'package:hello_flutter/timer_button.dart';
 import 'package:hello_flutter/workout.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'apiItemsList.dart';
 import 'clockTime_page.dart';
+import 'widgets/workout_displayer.dart';
 
 class MyStatefullHomePage extends StatefulWidget {
   const MyStatefullHomePage({super.key, required this.title});
@@ -18,7 +18,9 @@ class MyStatefullHomePage extends StatefulWidget {
 
 class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
   Workout _seletctedWorkout = Workout(
-      nome: 'Selecione um exercício', grupoMuscular: '', orientacoes: []);
+      nome: 'Selecione um exercício', grupoMuscular: '', orientacoes: [], id: 0);
+
+
 
   final _controller = YoutubePlayerController.fromVideoId(
     videoId: '',
@@ -99,30 +101,7 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
                               width: MediaQuery.of(context).size.width,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      'Exercício: ${_seletctedWorkout.nome}',
-                                      softWrap: true,
-                                      style: textStyle,
-                                    ),
-                                    Text(
-                                        "Repetições: ${_seletctedWorkout.repeticoes}",
-                                        softWrap: true),
-                                    Text("Carga: ${_seletctedWorkout.carga}",
-                                        softWrap: true),
-                                    for (var i = 0;
-                                        i <
-                                            _seletctedWorkout
-                                                .orientacoes!.length;
-                                        i++)
-                                      Text(_seletctedWorkout.orientacoes![i],
-                                          softWrap: true),
-                                  ],
-                                ),
+                                child: WorkoutDisplayer(seletctedWorkout: _seletctedWorkout, textStyle: textStyle),
                               ),
                             ),
                             if (_seletctedWorkout.image != "")
@@ -194,3 +173,4 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
     );
   }
 }
+

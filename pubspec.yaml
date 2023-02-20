@@ -44,6 +44,7 @@ dependencies:
   vibration: ^1.7.6
   percent_indicator: ^4.2.2
   shared_preferences: ^2.0.8
+  get_it: ^7.2.0
 
 flutter_native_splash:
   color: "#3F51B5"

@@ -6,13 +6,16 @@ class Workout {
   String repeticoes;
   String carga;
   String image;
+  int id;
   String videoId;
   bool _done = false;
   List<String>? orientacoes;
+  
 
   Workout({
     required this.nome,
     required this.grupoMuscular,
+    required this.id,
     this.repeticoes = "",
     this.carga = "",
     this.image = "",
@@ -27,6 +30,7 @@ class Workout {
     return Workout(
       nome: json['nome'] as String,
       grupoMuscular: json['grupoMuscular'] as String,
+      id: json['id'] as int,
       repeticoes: json['repeticoes'] as String,
       carga: json['carga'] as String,
       image: json['image'] as String,
