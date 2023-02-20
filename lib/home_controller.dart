@@ -2,23 +2,22 @@
 
 import 'package:flutter/cupertino.dart';
 
-class HomeController extends InheritedNotifier<ValueNotifier<int>>{
-  
+class HomeController extends InheritedNotifier<ValueNotifier<int>> {
   HomeController({Key? key, required Widget child})
-  : super(
-    key: key,
-    child: child,
-    notifier: ValueNotifier(0),
-  );
+      : super(
+          key: key,
+          child: child,
+          notifier: ValueNotifier(0),
+        );
 
-int get value => notifier!.value;
-String homeControllerStringVar = "Text stored in homeControllerStringVar ";
+  int get value => notifier!.value;
+  String homeControllerStringVar = "Text stored in homeControllerStringVar ";
 
-increment (){
-  notifier!.value++;
-}
-static HomeController of(BuildContext context){
-  return   context.dependOnInheritedWidgetOfExactType<HomeController>()!;
-}
+  increment() {
+    notifier!.value++;
+  }
 
+  static HomeController of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<HomeController>()!;
+  }
 }

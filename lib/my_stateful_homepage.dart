@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hello_flutter/app_controller.dart';
+import 'package:hello_flutter/timerPeriodic.dart';
+import 'package:hello_flutter/timer_button.dart';
 import 'package:hello_flutter/workout.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'apiItemsList.dart';
@@ -31,8 +34,6 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
       _seletctedWorkout = workout;
     });
 
-    print("VídeoId Carregado. ${_seletctedWorkout.videoId}");
-
     _controller.loadVideoById(videoId: workout.videoId);
 
     _controller.pauseVideo();
@@ -43,11 +44,25 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
     super.initState();
   }
 
+  TimePeriodic timePeriodic60 =
+      TimePeriodic(stopTimer: true, currentSeconds: 0, timerMaxSeconds: 60);
+
+  TimePeriodic timePeriodic90 =
+      TimePeriodic(stopTimer: true, currentSeconds: 0, timerMaxSeconds: 90);
+
+  TimePeriodic timePeriodic120 =
+      TimePeriodic(stopTimer: true, currentSeconds: 0, timerMaxSeconds: 120);
+
+  void stopAllTimers() {
+    timePeriodic120.stopTimer = true;
+    timePeriodic90.stopTimer = true;
+    timePeriodic60.stopTimer = true;
+  }
+
   @override
   Widget build(BuildContext context) {
     var apiItemsList = ApiItemsList(setWorkout: setCurrentWorkout);
     var textStyle = TextStyle(
-        // fontSize: 17,
         fontFamily: 'Raleway',
         fontWeight: FontWeight.w700);
 
@@ -86,7 +101,8 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Text(
                                       'Exercício: ${_seletctedWorkout.nome}',
@@ -99,7 +115,9 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
                                     Text("Carga: ${_seletctedWorkout.carga}",
                                         softWrap: true),
                                     for (var i = 0;
-                                        i < _seletctedWorkout.orientacoes!.length;
+                                        i <
+                                            _seletctedWorkout
+                                                .orientacoes!.length;
                                         i++)
                                       Text(_seletctedWorkout.orientacoes![i],
                                           softWrap: true),
@@ -117,14 +135,15 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
                                       height: 30,
                                       width: MediaQuery.of(context).size.width,
                                       child: Text(
-                                      'Exercício: ${_seletctedWorkout.nome}',
-                                      softWrap: true,
-                                      style: textStyle,
-                                  ),
+                                        'Exercício: ${_seletctedWorkout.nome}',
+                                        softWrap: true,
+                                        style: textStyle,
+                                      ),
                                     ),
                                     SizedBox(
-                                      height: 270,
-                                      child: Image.network(_seletctedWorkout.image)),
+                                        height: 270,
+                                        child: Image.network(
+                                            _seletctedWorkout.image)),
                                   ],
                                 ),
                               ),
@@ -154,16 +173,22 @@ class _MyStatefullHomePageState extends State<MyStatefullHomePage> {
         child: IconTheme(
             data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
             child: Row(
-              children: [IconButton(
-                  tooltip: 'Timer',
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  tooltip: 'Descanso',
                   icon: const Icon(Icons.timer),
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => ClockTimerPage()),
                     );
-                    print('You clicked in menu inferior');
                   },
-                ),],
+                ),
+                TimerButton(timerLimitInSeconds: 60, label: '1 min'),
+                TimerButton(timerLimitInSeconds: 90, label: '1.5 min'),
+                TimerButton(timerLimitInSeconds: 120, label: '2 min'),
+                
+              ],
             )),
       ),
     );
