@@ -1,14 +1,12 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hello_flutter/utils/app_controller.dart';
 import 'package:hello_flutter/utils/grupo_muscular.dart';
 import 'package:hello_flutter/utils/workout.dart';
-import 'package:vibration/vibration.dart';
+import 'package:hello_flutter/widgets/workout_listTile.dart';
+
 
 // import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 
 class ApiItemsListState extends State<ApiItemsList> {
   Color _currentColor = Color.fromARGB(0, 255, 255, 255);
@@ -17,25 +15,27 @@ class ApiItemsListState extends State<ApiItemsList> {
         Color.fromARGB(155, 43, 179, 151)),
     GrupoMuscular.color('Bíceps e Costas', 'assets/imgs/dumbbell.PNG',
         Color.fromARGB(155, 248, 252, 35)),
-    GrupoMuscular.color(
-        'Pernas Anterior', 'assets/imgs/leg.png', Color.fromARGB(155, 131, 131, 128)),
+    GrupoMuscular.color('Pernas Anterior', 'assets/imgs/leg.png',
+        Color.fromARGB(155, 131, 131, 128)),
     GrupoMuscular('Ombros', 'assets/imgs/ombros.png'),
-    GrupoMuscular.color(
-        'Pernas Posterior', 'assets/imgs/leg.png', Color.fromARGB(155, 243, 79, 51)),
+    GrupoMuscular.color('Pernas Posterior', 'assets/imgs/leg.png',
+        Color.fromARGB(155, 243, 79, 51)),
   ];
 
-  _onListTileClick(workout) {
+  _onListTileClick(Workout workout) {
     widget.setWorkout(workout);
+    setState(() {
+      _currentWorkoutId = workout.id;
+    });
   }
 
-  bool _canVibrate = false;
   var forceRender = 1;
   var _items = [];
 
   List<Workout> _displayItems = [];
   List<Workout> _listWorkout = [];
 
-int? _currentWorkoutIndex ; 
+  int? _currentWorkoutId;
 
   final _font = const TextStyle(
     fontSize: 15.0,
@@ -45,25 +45,14 @@ int? _currentWorkoutIndex ;
   void initState() {
     super.initState();
     _loadDataLocal();
-    _setVibrateStatus();
   }
 
-void resetCurrentWorkoutIndex(){
-
-  setState(() {
-    _currentWorkoutIndex = null;
-  });
-}
-
-  Future<void> _setVibrateStatus() async {
-    bool? canVibrate = await Vibration.hasVibrator();
-
-    if (canVibrate != null && canVibrate) {
-      setState(() {
-        _canVibrate = true;
-      });
-    }
+  void resetCurrentWorkoutIndex() {
+    setState(() {
+      _currentWorkoutId = null;
+    });
   }
+
 
   Future<void> _loadDataLocal() async {
     //lê o json
@@ -111,7 +100,6 @@ void resetCurrentWorkoutIndex(){
   // }
 
   _filterExercicesDisplayList(GrupoMuscular grupoMuscular) {
-
     List<Workout> filtredList = _listWorkout
         .where((element) => element.grupoMuscular == grupoMuscular.label)
         .toList();
@@ -135,7 +123,6 @@ void resetCurrentWorkoutIndex(){
           for (var i = 0; i < gruposMusculares.length; i++)
             InkWell(
               onTap: () {
-
                 _filterExercicesDisplayList(gruposMusculares[i]);
               },
               splashColor: Colors.blue,
@@ -181,43 +168,13 @@ void resetCurrentWorkoutIndex(){
     List<Workout> itemsLocally = _displayItems;
 
     return ListTileTheme(
-      selectedColor: Colors.black, 
-      child: ListTile(
-          tileColor: _currentColor,
-          selected: _currentWorkoutIndex == position ,
-          selectedTileColor: _currentColor.withOpacity(0.99),
-          trailing: itemsLocally[position].getStatus ? Icon(Icons.done) : null,
-          onLongPress: () {
-            itemsLocally[position].toggleDone();
-            if (_canVibrate) {
-              Vibration.vibrate(duration: 500);
-            }
-            AppController.instance.notifyAll();
-          },
-          shape: RoundedRectangleBorder(
-            side: BorderSide(width: 2, color: Color.fromARGB(255, 255, 255, 255)),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          title: Text(
-            itemsLocally[position].nome,
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                fontSize: 17, fontFamily: 'Raleway', fontWeight: FontWeight.w700),
-          ),
-          subtitle: Text("Grupo: ${itemsLocally[position].grupoMuscular}  ",
-              style: _font),
-          leading: Padding(
-              padding: EdgeInsets.all(0.5),
-              child: SizedBox(
-                  width: MediaQuery.of(context).size.width / 7,
-                  child: Image.network(itemsLocally[position].image, scale: 1))),
-          onTap: () {
-            _onListTileClick(itemsLocally[position]);
-            setState(() {
-              _currentWorkoutIndex = position;
-            });
-          }),
-    );
+        selectedColor: Colors.black,
+        child: WorkoutListTile(
+          currentColor: _currentColor,
+          workout: itemsLocally[position],
+          currentWorkoutId: _currentWorkoutId,
+          setWorkout: _onListTileClick,
+        ));
   }
 
   @override
