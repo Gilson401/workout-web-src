@@ -1,25 +1,30 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
+import 'dart:convert';
 class Workout {
   String nome;
   String grupoMuscular;
   String repeticoes;
   String carga;
   String image;
-  int id;
   String videoId;
-  bool _done = false;
   List<String>? orientacoes;
-  
+
+  int id;
+  int seriesFeitas;
+  String lastDayDone = "";
+  String currentCarga = "";
+    
 
   Workout({
     required this.nome,
     required this.grupoMuscular,
-    required this.id,
     this.repeticoes = "",
     this.carga = "",
     this.image = "",
+    required this.id,
     this.videoId = "",
+    this.seriesFeitas = 0,
     this.orientacoes
   });
 
@@ -28,26 +33,61 @@ class Workout {
     List<String> list = List<String>.from(json['orientacoes']);
 
     return Workout(
-      nome: json['nome'] as String,
-      grupoMuscular: json['grupoMuscular'] as String,
+      nome: json['nome'] ?? "",
+      grupoMuscular: json['grupoMuscular'] ?? "",
       id: json['id'] as int,
-      repeticoes: json['repeticoes'] as String,
-      carga: json['carga'] as String,
-      image: json['image'] as String,
-      videoId: json['videoId'] as String,  
+      repeticoes: json['repeticoes'] ?? "",
+      carga: json['carga'] ?? "",
+      image: json['image'] ?? "",
+      videoId: json['videoId'] ?? "",  
       orientacoes: list,    
     );
   }
 
-void toggleDone(){
-  _done = !_done;
-  
+
+void setCurrentCarga(String cargaValue){
+  currentCarga = cargaValue;
 }
 
-bool get getStatus {
-  return _done;
+void setLastDayDone(String lastDay){
+  lastDayDone = lastDay;
 }
+
+void incrementSeriesFeitas(){
+  seriesFeitas++;
+}
+
+void decrementSeriesFeitas(){
+  seriesFeitas--;
+}
+
+
+///devolve um map com os dados lastDayDone seriesFeitas id currentCarga no localStorage
+Map<String, dynamic> toStoreMap() {
+    return <String, dynamic>{
+      'lastDayDone': lastDayDone,
+      'seriesFeitas': seriesFeitas,
+      'id': id,
+      'currentCarga': currentCarga,
+    };
+  }
+  
+
+///Retorna uma jsonString com os dados lastDayDone seriesFeitas id currentCarga no localStorage
+String toStoreJson() => json.encode(toStoreMap());
+
+///Recupera os dados de local storage: lastDayDone seriesFeitas id currentCarga no localStorage
+ static Map<String, dynamic>  fromLocalStoredJson(String jsonParam) {
+    Map<String, dynamic> json = jsonDecode(jsonParam);
+    return  {
+      'lastDayDone': json['lastDayDone'] ?? "",
+      'id': json['id'] as int,
+      'currentCarga': json['currentCarga'] ?? "",
+      'seriesFeitas': json['seriesFeitas'] ?? 0,   
+    };
+  }
+
 
   @override
-  String toString() => 'nome é $nome , grupoMuscular é $grupoMuscular';
+  String toString() => 'Id: $id , Nome: é $nome';
 }

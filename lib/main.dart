@@ -4,11 +4,10 @@ import 'widgets/myapp.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-    SystemChrome.setPreferredOrientations([
+   startModules();
+   runApp(const App());
+   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  startModules();
-  runApp(const MyApp());
 }
-

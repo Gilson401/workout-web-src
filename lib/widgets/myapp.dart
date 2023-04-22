@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/utils/app_controller.dart';
+import 'package:hello_flutter/pages/home.dart';
 
-// import 'home_controller.dart';
-import '../pages/my_stateful_homepage.dart';
-// import 'stateless_homepage.dart';
+class App extends StatefulWidget {
+  const App({super.key});
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  void reRender() {
+    setState((() {}));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,8 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.cyan,
               backgroundColor: Color.fromARGB(121, 247, 247, 247),
             ),
-            home: MyStatefullHomePage(title: 'Séries de exercícios'),
+            home: Home(
+                title: 'Meus Exercícios', reRenderFn: reRender),
           );
         });
   }

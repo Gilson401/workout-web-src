@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:hello_flutter/utils/app_constants.dart' as locals;
 abstract class LocalStorage {
   Future<String?> get(String key);
   void set(String key, dynamic value);
@@ -11,6 +11,18 @@ class SharePreferencesImpl implements LocalStorage {
 
   Future<dynamic> _getInstance() async =>
       _prefs = await SharedPreferences.getInstance();
+
+  Future<List<String>?> getAppLocalStorageKeys() async {
+    await _getInstance();
+
+    List<String>? keys = _prefs?.getKeys().toList();
+
+    List<String>? filteredKeys = keys
+        ?.where((key) => key.contains(locals.AppConstants.storageWorkoutSerieDone))
+        .toList();
+
+    return filteredKeys;
+  }
 
   @override
   Future<String?> get(String key) async {

@@ -27,7 +27,6 @@ class AppController extends ChangeNotifier {
       _canVibrate = true;
     }
 
-    print('Controle started and _canVibrate is $_canVibrate');
   }
 
   notifyAll() {
