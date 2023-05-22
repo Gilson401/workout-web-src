@@ -27,29 +27,21 @@ class WorkoutGroupState extends State<WorkoutGroup> {
 
   List<GrupoMuscular> gruposMusculares = [
     GrupoMuscular.color(
-        label: 'Peito e Tríceps',
-        // image: 'assets/imgs/peito.png',
+        label: 'A: Peito e Ombros',
         svg: AppConstants.svgA,
         color: Color.fromARGB(155, 43, 179, 151)),
     GrupoMuscular.color(
-        label: 'Bíceps e Costas',
-        // image: 'assets/imgs/dumbbell.PNG',
+        label: 'B: Costas e Ombro',
         svg: AppConstants.svgB,
         color: Color.fromARGB(155, 248, 252, 35)),
     GrupoMuscular.color(
-        label: 'Pernas Anterior',
-        // image: 'assets/imgs/leg.png',
+        label: 'C: Pernas',
         svg: AppConstants.svgC,
         color: Color.fromARGB(155, 131, 131, 128)),
-    GrupoMuscular(label: 'Ombros', 
-    // image: 'assets/imgs/ombros.png',
-    svg: AppConstants.svgD,
-    ),
     GrupoMuscular.color(
-        label: 'Pernas Posterior',
-        // image: 'assets/imgs/leg.png',
-        svg: AppConstants.svgE,
-        color: Color.fromARGB(155, 243, 79, 51)),
+        label: 'D: Bíceps e Tríceps',
+        svg: AppConstants.svgD,
+        color: Color.fromARGB(155, 243, 79, 51))
   ];
 
   LocalStorageWorkoutHandler localStorageWorkoutHandler =

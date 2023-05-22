@@ -7,7 +7,6 @@ import 'package:hello_flutter/utils/local_storage.dart';
 import 'package:hello_flutter/utils/local_storage_workout_handler.dart';
 import 'package:hello_flutter/utils/workout.dart';
 
-
 class WorkoutListTile extends StatefulWidget {
   final Color currentColor;
   final int? currentWorkoutId;
@@ -56,10 +55,9 @@ class _WorkoutListTileState extends State<WorkoutListTile> with DateFunctions {
         tileColor: widget.currentColor,
         selectedTileColor: widget.currentColor.withOpacity(0.99),
         selected: widget.currentWorkoutId == widget.workout.id,
-        trailing: widget.workout.lastDayDone == dateCurrent 
-        ? Icon(Icons.check_circle_outline)
-        : Icon(Icons.circle_outlined),
-        
+        trailing: widget.workout.lastDayDone == dateCurrent
+            ? Icon(Icons.check_circle_outline)
+            : Icon(Icons.circle_outlined),
         shape: RoundedRectangleBorder(
           side: BorderSide(width: 2, color: Color.fromARGB(255, 255, 255, 255)),
           borderRadius: BorderRadius.circular(12),
@@ -70,14 +68,16 @@ class _WorkoutListTileState extends State<WorkoutListTile> with DateFunctions {
           style: TextStyle(
               fontSize: 17, fontFamily: 'Raleway', fontWeight: FontWeight.w700),
         ),
-        subtitle: Row(
-          children: [
-            if (widget.workout.lastDayDone != "")
-              Text(widget.workout.lastDayDone, style: _font),
-            SizedBox(width: 15),
-            for (var i = 0; i < widget.workout.seriesFeitas; i++)
-              Icon(Icons.check_circle_outline, color: Colors.black, size: 16),
-          ],
+        subtitle: ClipRect(
+          child: Wrap(
+            children: [
+              if (widget.workout.lastDayDone != "")
+                Text(widget.workout.lastDayDone, style: _font),
+              SizedBox(width: 15),
+              for (var i = 0; i < widget.workout.seriesFeitas; i++)
+                Icon(Icons.check_circle_outline, color: Colors.black, size: 16),
+            ],
+          ),
         ),
         leading: Padding(
           padding: EdgeInsets.all(0.5),
@@ -91,11 +91,11 @@ class _WorkoutListTileState extends State<WorkoutListTile> with DateFunctions {
           Navigator.of(context).push(
             MaterialPageRoute(
                 builder: (context) => WorkoutPage(
-                    seletctedWorkout: widget.workout,
-                    textStyle: const TextStyle(
-                      fontSize: 15.0,
-                    ),
-                    reRenderFn: widget.reRenderFn,
+                      seletctedWorkout: widget.workout,
+                      textStyle: const TextStyle(
+                        fontSize: 15.0,
+                      ),
+                      reRenderFn: widget.reRenderFn,
                     )),
           );
         });

@@ -6,7 +6,6 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:hello_flutter/widgets/timer_button.dart';
 import 'package:hello_flutter/widgets/clocktimer_page.dart';
 
-
 class WorkoutPage extends StatefulWidget {
   final Workout _seletctedWorkout;
   final TextStyle textStyle;
@@ -25,10 +24,11 @@ class WorkoutPage extends StatefulWidget {
 }
 
 class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
-
   LocalStorageWorkoutHandler localStorageManager = LocalStorageWorkoutHandler();
 
   String? _temporaryCarga;
+  String? _videoTitle;
+
   int _title = 0;
 
   int counter = 0;
@@ -42,17 +42,21 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
     ),
   );
 
-  void setCurrentWorkout() async {
-    _controller.loadVideoById(videoId: widget._seletctedWorkout.videoId);
-    _controller.pauseVideo();
-  }
-
   @override
   void initState() {
     super.initState();
     _title = widget._seletctedWorkout.id;
     _setCurrentWorkoutCarga('appMayWorkoutIdId_${widget._seletctedWorkout.id}');
-    setCurrentWorkout();
+
+    _controller.listen((event) {
+      print('LOG ${event.playerState}');
+
+      if (event.metaData.title != "" && event.metaData.title != null) {
+        setState(() {
+          _videoTitle = event.metaData.title;
+        });
+      }
+    });
   }
 
   @override
@@ -79,14 +83,13 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
     });
   }
 
-  
-
   final _focusNode = FocusNode();
 
   @override
   void dispose() {
     _focusNode.dispose();
     _controller.close();
+
     super.dispose();
   }
 
@@ -164,29 +167,56 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
     });
   }
 
-String get dateCurrent => currentData();
+  String get dateCurrent => currentData();
+  bool _showvideo = false;
+  BoxDecoration boxNotDisponible() {
+    return BoxDecoration(
+      color: Colors.black.withOpacity(0.9),
+      borderRadius: BorderRadius.circular(4),
+    );
+  }
+
+  void resetDataForToday() {
+    widget._seletctedWorkout.setLastDayDone("");
+    widget._seletctedWorkout.setSeriesFeitas(0);
+    localStorageManager.saveWorkoutData(widget._seletctedWorkout);
+    if (widget.reRenderFn != null) {
+      widget.reRenderFn!();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget._seletctedWorkout.nome),
+        title: Text(
+          widget._seletctedWorkout.nome,
+          softWrap: true,
+          maxLines: 2,
+        ),
         elevation: 10,
         actions: [
           Switch(
-          value: widget._seletctedWorkout.lastDayDone == dateCurrent,
-          onChanged: (bool value) {
-            if (value) {
-              widget._seletctedWorkout.setLastDayDone(dateCurrent);
-            } else {
-              widget._seletctedWorkout.setLastDayDone("");
-            }
-            localStorageManager.saveWorkoutData(widget._seletctedWorkout);
-            widget.reRenderFn!();
-          },
-          activeColor: Color.fromARGB(255, 2, 86, 155),
-          inactiveTrackColor: Color.fromARGB(141, 13, 17, 24),
-        ),
+            value: widget._seletctedWorkout.lastDayDone == dateCurrent,
+            onChanged: (bool value) {
+              if (value) {
+                widget._seletctedWorkout.setLastDayDone(dateCurrent);
+              } else {
+                widget._seletctedWorkout.setLastDayDone("");
+              }
+              localStorageManager.saveWorkoutData(widget._seletctedWorkout);
+              widget.reRenderFn!();
+            },
+            activeColor: Color.fromARGB(255, 2, 86, 155),
+            inactiveTrackColor: Color.fromARGB(141, 13, 17, 24),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 15.0, left: 30.0),
+            child: GestureDetector(
+              onTap: resetDataForToday,
+              child: Icon(Icons.reset_tv),
+            ),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -207,51 +237,53 @@ String get dateCurrent => currentData();
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Repetições: ${widget._seletctedWorkout.repeticoes}",
-                      softWrap: true),
+                      softWrap: true,
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                   SizedBox(height: 10),
-                              //Botões de repetições feitas
-            Row(
-              children: [
-                ElevatedButton.icon(
-                    onPressed: () {
-                      if (widget._seletctedWorkout.seriesFeitas > 0) {
-                        widget._seletctedWorkout.decrementSeriesFeitas();
-                        localStorageManager
-                            .saveWorkoutData(widget._seletctedWorkout);
-                        if (widget.reRenderFn != null) {
-                          widget.reRenderFn!();
-                        }
-                      }
-                    },
-                    icon: Icon(Icons.remove_circle_outline),
-                    label: Container()),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  //Botões de repetições feitas
+                  Row(
                     children: [
-                      for (var i = 0;
-                          i < widget._seletctedWorkout.seriesFeitas;
-                          i++)
-                        Icon(Icons.check_circle_outline, color: Colors.green),
+                      ElevatedButton.icon(
+                          onPressed: () {
+                            if (widget._seletctedWorkout.seriesFeitas > 0) {
+                              widget._seletctedWorkout.decrementSeriesFeitas();
+                              localStorageManager
+                                  .saveWorkoutData(widget._seletctedWorkout);
+                              if (widget.reRenderFn != null) {
+                                widget.reRenderFn!();
+                              }
+                            }
+                          },
+                          icon: Icon(Icons.remove_circle_outline),
+                          label: Container()),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            for (var i = 0;
+                                i < widget._seletctedWorkout.seriesFeitas;
+                                i++)
+                              Icon(Icons.check_circle_outline,
+                                  color: Colors.green),
+                          ],
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                          //ADICIONA REPETICAO########################
+                          onPressed: () {
+                            widget._seletctedWorkout.incrementSeriesFeitas();
+                            localStorageManager
+                                .saveWorkoutData(widget._seletctedWorkout);
+                            if (widget.reRenderFn != null) {
+                              widget.reRenderFn!();
+                            }
+                          },
+                          icon: Icon(Icons.add_circle_outline),
+                          label: Container())
                     ],
                   ),
-                ),
-                ElevatedButton.icon(
-                    //ADICIONA REPETICAO########################
-                    onPressed: () {
-                      widget._seletctedWorkout.incrementSeriesFeitas();
-                      localStorageManager
-                          .saveWorkoutData(widget._seletctedWorkout);
-                      if (widget.reRenderFn != null) {
-                        widget.reRenderFn!();
-                      }
-                    },
-                    icon: Icon(Icons.add_circle_outline),
-                    label: Container())
-              ],
-            ),
 
-             SizedBox(height: 10),
+                  SizedBox(height: 10),
 
                   for (var i = 0;
                       i < widget._seletctedWorkout.orientacoes!.length;
@@ -264,7 +296,6 @@ String get dateCurrent => currentData();
                 ],
               ),
             ),
-
 
             SizedBox(height: 10),
 
@@ -317,21 +348,80 @@ String get dateCurrent => currentData();
 
             //Foto do exercício ##################################:
             if (widget._seletctedWorkout.image != "")
-              DecoratedBox(
-                decoration: BoxDecoration(),
-                child: Center(
-                  child: SizedBox(
-                      height: 270,
-                      child: Image.network(widget._seletctedWorkout.image)),
-                ),
+              Center(
+                child: SizedBox(
+                    height: 270,
+                    child: Image.network(widget._seletctedWorkout.image)),
               ),
 
             SizedBox(height: 10),
 
-            //Youtube VideoPayer ######################################
-            if (widget._seletctedWorkout.videoId != "")
+            if (widget._seletctedWorkout.videoId == "")
+              AspectRatio(
+                aspectRatio: 16 / 9,
+                child: DecoratedBox(
+                  decoration: boxNotDisponible(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Não há vídeo definido para este item.',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Center(
+                          child: Icon(
+                        Icons.videocam_off_rounded,
+                        size: 100.0,
+                      )),
+                    ],
+                  ),
+                ),
+              ),
+
+            if (!_showvideo && widget._seletctedWorkout.videoId != "")
+              InkWell(
+                onTap: () {
+                  _controller.loadVideoById(
+                      videoId: widget._seletctedWorkout.videoId);
+                  setState(() {
+                    _showvideo = true;
+                  });
+                },
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: DecoratedBox(
+                      decoration: boxNotDisponible(),
+                      child: Center(
+                          child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'Vídeo não carregado, toque para carregar',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Icon(
+                            Icons.smart_display,
+                            size: 100.0,
+                          )
+                        ],
+                      ))),
+                ),
+              ),
+
+            if (_videoTitle != null)
+              Center(
+                  child: Text(_videoTitle ?? "",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20.0))),
+
+            if (_showvideo && widget._seletctedWorkout.videoId != "")
               SizedBox(
-                // height: 300,
                 width: MediaQuery.of(context).size.width,
                 child: YoutubePlayer(
                   controller: _controller,

@@ -61,6 +61,9 @@ void decrementSeriesFeitas(){
   seriesFeitas--;
 }
 
+void setSeriesFeitas(int value){
+  seriesFeitas = value;
+}
 
 ///devolve um map com os dados lastDayDone seriesFeitas id currentCarga no localStorage
 Map<String, dynamic> toStoreMap() {
