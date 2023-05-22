@@ -8,7 +8,7 @@
             "name": "hello_flutter",
             "request": "launch",
             "type": "dart",
-            "args": ["someArgs in launch json"]
+            "args": ["--web-port", "8686"]
         },
         {
             "name": "hello_flutter (profile mode)",
