@@ -1,0 +1,593 @@
+{
+    "exercicios": [
+        {
+            "grupoMuscular": "Peito e Tríceps",
+            "id": 1,
+            "nome": "TRÍCEPS UNIL.CRUZADO",
+            "repeticoes": "3 X 20",
+            "carga": "Carga Máxima",
+            "orientacoes": ["Pode usar a alça de pano para facilitar a pegada"],
+            "videoId": "sFM-PzhijMU",
+            "image": "https://user-images.githubusercontent.com/66516553/209981951-792dbcd4-1cb2-4d69-96fb-c1aec1c2cfa1.png"
+        },
+        {
+            "grupoMuscular": "Peito e Tríceps",
+            "id": 2,
+            "nome": "TRÍCEPS FRANCÊS CORDA",
+            "repeticoes": "3 X 15",
+            "carga": "Carga Máxima",
+            "orientacoes": [],
+            "videoId": "Otc5BgXa-l8",
+            "image": "https://user-images.githubusercontent.com/66516553/209981226-15426e08-8900-4777-8664-2cf988e6ce46.png"
+        },
+        {
+            "grupoMuscular": "Peito e Tríceps",
+            "id": 3,
+            "nome": "TRÍCEPS PRONADO + SUPINADO",
+            "repeticoes": "3 X 10 pronado + 10 supinado",
+            "carga": "aumentando aem cada série",
+            "orientacoes": [],
+            "videoId": "i8awVst0IZ0",
+            "image": "https://user-images.githubusercontent.com/66516553/209980698-73fc24ee-9bcc-40de-8078-1737cc663570.png"
+        },
+        {
+            "grupoMuscular": "Peito e Tríceps",
+            "id": 4,
+            "nome": "TRÍCEPS TESTA 2 PEGADAS",
+            "repeticoes": "3x12",
+            "carga": "aumentar em cada série",
+            "orientacoes": ["Fazer no cross", 
+            "Duas pegadas é com a alça de pano ou de metal"
+        ],
+            "videoId": "hpxi7fAwCCI",
+            "image": "https://user-images.githubusercontent.com/66516553/213179443-08e2dc90-1f43-4961-904b-49c78c879d38.png"
+        },
+        {
+            "grupoMuscular": "Peito e Tríceps",
+            "id": 5,
+            "nome": "PEITO NO CROSS",
+            "repeticoes": "3 X 6² + 6",
+            "carga": "Aumentar a carga entre as repetições",
+            "orientacoes": [
+                "Faz 6 segurando 2seg no pico + 6 comuns",
+                "Cotovelo recolhe até as costas."],
+            "videoId": "o90Pm6qTeNI",
+            "image": "https://user-images.githubusercontent.com/66516553/209979756-d050283a-4a80-4353-a2ed-c499384d7da7.png"
+        },
+        {
+            "grupoMuscular": "Peito e Tríceps",
+            "id": 6,
+            "nome": "SUPINO 45°",
+            "repeticoes": "3x12",
+            "carga": "Carga máxima",
+            "orientacoes": ["Escápulas travadas para tras"],
+            "videoId": "oZjIQN0YMX0",
+            "image": "https://user-images.githubusercontent.com/66516553/209978739-0b22822e-60c3-48a1-960f-495805e24920.png"
+        },
+        {
+            "grupoMuscular": "Peito e Tríceps",
+            "id": 7,
+            "nome": "SUPINO VERTICAL",
+            "repeticoes": "3 X 6²+6",
+            "carga": "Aumentar a carga entre as repetições",
+            "orientacoes": [
+                "Faz 6 segurando 2seg no pico + 6 comuns",
+                "Escápulas travadas para tras"],
+            "videoId": "oZjIQN0YMX0",
+            "image": "https://user-images.githubusercontent.com/66516553/209474109-60ec9b0d-2ea0-494d-a644-f103b2b7335f.png"
+        },
+        {
+            "grupoMuscular": "Peito e Tríceps",
+            "id": 8,
+            "nome": "SUPINO RETO",
+            "repeticoes": "1X15 1X12 1X10 1X8 1X6",
+            "carga": "Aumente a carga entre as séries",
+            "orientacoes": ["Escápula travada e para trás.",
+                            "A pegada deve fazer 90° no cotovelo"],
+            "videoId": "rGc9PbmLUY4",
+            "image": "https://user-images.githubusercontent.com/66516553/209474069-38b92555-b6e5-43ea-8210-956b8d15c6c7.png"
+        },
+        {
+            "grupoMuscular": "Peito e Tríceps",
+            "id": 9,
+            "nome": "CRUCIFIXO HORIZONTAL NEUTRO",
+            "repeticoes": "3 X 10",
+            "carga": "máximo",
+            "orientacoes": ["Deitado no banco reto"],
+            "videoId": "NI3tAZ9OAag",
+            "image": "https://user-images.githubusercontent.com/66516553/213181099-a0f686a9-4e22-4514-8381-f2b039cec5be.png"
+        },
+
+
+        {
+            "grupoMuscular": "Pernas Anterior",
+            "id": 10,
+            "nome": "AGACH.SQUAT",
+            "repeticoes": "4 X 10",
+            "carga": "aumentar",
+            "orientacoes": [],
+            "videoId": "pc9tkM2mVAs",
+            "image": "https://user-images.githubusercontent.com/66516553/209880415-2b900ddc-1986-485e-acc6-144350008f32.png"
+        },
+
+        {
+            "grupoMuscular": "Pernas Anterior",
+            "id": 11,
+            "nome": "CADEIRA EXTENSORA",
+            "repeticoes": "4 X 10² + 10",
+            "carga": "aumentar",
+            "orientacoes": ["Cada série é 10 segurando 2 seg no pico mais 10 normais.", "Mantenha o quadril sempre encaixado no banco"],
+            "videoId": "1f1DjMr68hY",
+            "image": "https://user-images.githubusercontent.com/66516553/210868633-253f0abf-8375-42f4-b63b-ab04023321c5.png"
+        },
+
+        {
+            "grupoMuscular": "Pernas Anterior",
+            "id": 12,
+            "nome": "HACK MACHINE",
+            "repeticoes": "4 X (10 aberto + 10 junto)",
+            "carga": "aumentar",
+            "orientacoes": ["Agachar o máximo que puder."],
+            "videoId": "QZglgfUQZdk",
+            "image": "https://user-images.githubusercontent.com/66516553/210869628-c5c9baca-b020-4b4c-98f4-7acac1b7c0ca.png"
+        },
+
+
+        {
+            "grupoMuscular": "Pernas Anterior",
+            "id": 13,
+            "nome": "LEG 45",
+            "repeticoes": "4 X (10+10s + 10+10s + 10)",
+            "carga": "Aumentar com cautela",
+            "orientacoes": ["10+10s = 10 normais + segurar 10 segundos no fim"],
+            "videoId": "kyESFAj3W0E",
+            "image": "https://user-images.githubusercontent.com/66516553/210870661-e716a3ff-7a2d-45b8-a77c-16a9b948f5aa.png"
+        },
+
+        {
+            "grupoMuscular": "Pernas Anterior",
+            "id": 14,
+            "nome": "PASSADA",
+            "repeticoes": "3 x (10 ida + 10 volta)",
+            "carga": "Conforme suportar",
+            "orientacoes": ["Dá pra fazer parado já que é um afundo andando"],
+            "videoId": "PCSEZejLkjk",
+            "image": "https://user-images.githubusercontent.com/66516553/210871239-a57631e8-ad81-4d1b-a8cd-5dd2feceaa7b.png"
+        },
+
+        {
+            "grupoMuscular": "Pernas Anterior",
+            "id": 15,
+            "nome": "LEG HORIZONTAL",
+            "repeticoes": "4X10",
+            "carga": "Aumentar",
+            "orientacoes": [
+                "Máquina do legpress sentado ao lado do cross",
+                "Ajuste o banco para buscar uma amplitude máxima",
+                "Permaneça com o quadril encaixado no banco",
+                "Não estenda o joelho ao ponto de perder a tensão e gerar um ponto de descanso.",
+                "Joelhos distantes sem se aproximarem durante o movimento"
+            ],
+            "videoId": "JxwOJQ9KG8E",
+            "image": "https://user-images.githubusercontent.com/66516553/210872118-129db3b8-7f00-42f1-964b-68d8450935e5.png"
+        },
+
+        {
+            "grupoMuscular": "Pernas Anterior",
+            "id": 16,
+            "nome": "CADEIRA ADUTORA",
+            "repeticoes": "4 x 20",
+            "carga": "Aumenta em cada série",
+            "orientacoes": ["Faz força fechando a perna"],
+            "videoId": "goQVyEGMYMM",
+            "image": "https://user-images.githubusercontent.com/66516553/210872772-7ee7be96-b5d0-40d2-9256-2963d444fced.png"
+        },
+        {
+            "grupoMuscular": "Pernas Anterior",
+            "id": 17,
+            "nome": "AGACHAMENTO SUMO",
+            "repeticoes": "3 x 20",
+            "carga": "Conforme suportar",
+            "orientacoes": ["Pes afastados um pouco além da largura do quadril",
+                            "Pés virados para fora",
+                            "Costas retas e cabeça alinhada",
+                            "Escápulas travadas para tras",
+                            "Joelhos afastando para fora na descida"],
+            "videoId": "XypoxVWr0zs",
+            "image": "https://user-images.githubusercontent.com/66516553/210873786-7e063c30-8085-40d4-b3f1-f7cce789e12b.png"
+        },
+
+        {
+            "grupoMuscular": "Pernas Anterior",
+            "id": 18,
+            "nome": "CADEIRA EXTENSORA UNILATERAL",
+            "repeticoes": "4 x 10",
+            "carga": "Aumenta em cada série",
+            "orientacoes": ["Fazer uma perna de cada vez", "Mantenha o quadril encaixado no banco."],
+            "videoId": "7HcK7fmYJP0",
+            "image": "https://user-images.githubusercontent.com/66516553/210868633-253f0abf-8375-42f4-b63b-ab04023321c5.png"
+        },
+
+
+        {
+            "grupoMuscular": "Pernas Posterior",
+            "id": 19,
+            "nome": "CADEIRA FLEXORA",
+            "repeticoes": "4 X 10 c + 10",
+            "carga": "aumentar",
+            "orientacoes": ["É a que força fechando"],
+            "videoId": "JTr9Ud6p8h8",
+            "image": "https://user-images.githubusercontent.com/66516553/210381904-e4da4002-73ed-4df8-976e-0d7216824bb2.png"
+        },
+        {
+            "grupoMuscular": "Pernas Posterior",
+            "id": 20,
+            "nome": "LEG 90",
+            "repeticoes": " 4X 10(aber)+10(fech)",
+            "carga": "aumentar",
+            "orientacoes": [
+                "Treino 5!",
+                "É a máquina que ficamos deitados"
+            ],
+            "videoId": "xubDDXdiTNs",
+            "image": "https://user-images.githubusercontent.com/66516553/210384122-f0c93768-186e-4489-a72d-c0c76cd97c87.png"
+        },
+        {
+            "grupoMuscular": "Pernas Posterior",
+            "id": 21,
+            "nome": "MESA FLEXORA",
+            "repeticoes": " 4X 10",
+            "carga": "aumentar",
+            "orientacoes": [
+                "Treino 5!",
+                "É a máquina que ficamos deitados de barriga p baixo."
+            ],
+            "videoId": "OMKhQ2O11fc",
+            "image": "https://user-images.githubusercontent.com/66516553/210384935-e1949b30-495f-4a3d-b465-991015de21aa.png"
+        },
+
+        {
+            "grupoMuscular": "Pernas Posterior",
+            "id": 22,
+            "nome": "AFUNDO SMITH",
+            "repeticoes": "4X 10",
+            "carga": "aumentar",
+            "orientacoes": [
+                "Treino 5!"                
+            ],
+            "videoId": "64KGoPp3gFA",
+            "image": "https://user-images.githubusercontent.com/66516553/210385399-bc378ca1-b368-4a4c-92bc-9458fc29bea2.png"
+        },
+
+        {
+            "grupoMuscular": "Pernas Posterior",
+            "id": 23,
+            "nome": "FLEXAO VERTICAL",
+            "repeticoes": "4X10+10'' ",
+            "carga": "Conforme suportar",
+            "orientacoes": [
+                "Treino 5!"                
+            ],
+            "videoId": "HGoN-nfJFGE",
+            "image": "https://user-images.githubusercontent.com/66516553/210386006-a6c02887-0704-4c37-81f1-4663d219e25e.png"
+        },
+
+        {
+            "grupoMuscular": "Pernas Posterior",
+            "id": 24,
+            "nome": "PANTURRILHA VERTICAL",
+            "repeticoes": "4X20 (2t)",
+            "carga": "Aumentar a cada série",
+            "orientacoes": [
+                "Dais tempos é 1 inteira + 1 da metade para cima",
+                "Treino 5!"                
+            ],
+            "videoId": "9gE-KuikzvI",
+            "image": "https://user-images.githubusercontent.com/66516553/210386951-9af6bb9d-3c9f-41b6-a712-562cb9145a23.png"
+        },
+
+
+        {
+            "grupoMuscular": "Pernas Posterior",
+            "id": 25,
+            "nome": "CADEIRA ABDUTORA",
+            "repeticoes": "4X20",
+            "carga": "Aumentar a cada série",
+            "orientacoes": [
+                "Fazer força abrindo a perna",
+                "Treino 5!"                
+            ],
+            "videoId": "UB5qna8tQkw",
+            "image": "https://user-images.githubusercontent.com/66516553/210387465-508303c9-4bad-4287-a279-7291cba800cc.png"
+        },
+
+        {
+            "grupoMuscular": "Pernas Posterior",
+            "id": 26,
+            "nome": "STIFF BARRA",
+            "repeticoes": "4X15",
+            "carga": "Aumentar a cada série",
+            "orientacoes": [
+                "Treino 5!"                
+            ],
+            "videoId": "F8q6ZIizAcY",
+            "image": "https://user-images.githubusercontent.com/66516553/210388051-e15c7fff-471c-4536-ba98-afaa8b56322f.png"
+        },
+        {
+            "grupoMuscular": "Pernas Posterior",
+            "id": 27,
+            "nome": "LEVANTAMENTO TERRA",
+            "repeticoes": "4X10",
+            "carga": "Aumentar a cada série",
+            "orientacoes": [
+                "Treino 5!"                
+            ],
+            "videoId": "T3x53s0jEns",
+            "image": "https://user-images.githubusercontent.com/66516553/210388804-f4058283-47a9-4991-a8cd-a7a8988c13c8.png"
+        },
+        {
+            "grupoMuscular": "Bíceps e Costas",
+            "id": 28,
+            "nome": "PUXADA TRIANGULO",
+            "repeticoes": "1X15 1X12 1X10 1X8 1X6",
+            "carga": "aumentar",
+            "orientacoes": [
+                "Incline levemente para trás enquanto puxa",
+                "Procure manter o ângulo do cotovelo em 90° todo o movimento",
+                "O triâgulo deve ficar afastado do rosto durante o movimento."
+            ],
+            "videoId": "qW3-gblri0g",
+            "image": "https://user-images.githubusercontent.com/66516553/209880520-5abf2e1d-b7dc-4b33-a508-f55e1b20bdee.png"
+        },
+        {
+            "grupoMuscular": "Bíceps e Costas",
+            "id": 29,
+            "nome": "REMADA SENTADO  NEUTRO",
+            "repeticoes": "3X 6²+ 6",
+            "carga": "Aumentar",
+            "orientacoes": [
+                "Avalie fazer pegada pronada ao invés de neutra",
+                "Faz 6 segurando 2seg no pico + 6 comuns", 
+                "Jogue o corpo para frente no início buscando manter o cotovelo em 90°",
+                "Usar triângulo ou pegadores de mão na vertical"
+            ],
+            "videoId": "9AzRwQNl7uk",
+            "image": "https://user-images.githubusercontent.com/66516553/210891073-e7f660d6-a18d-40b4-8eb7-7c13535d2754.png"
+        },
+        {
+            "grupoMuscular": "Bíceps e Costas",
+            "id": 30,
+            "nome": "PUXADA ARTICULADA",
+            "repeticoes": "3 x 10",
+            "carga": "Aumenta em cada série",
+            "orientacoes": [
+                "Cormo pevemente para trás", 
+                "O movimento das escápulas é uma fase isolada na subida e descida",
+                "Escáculas encaixadas",
+                "Cotovelo levemente para frente",
+                "Executar de forma bem lenta"],
+            "videoId": "qQ6jCONbYgE",
+            "image": "https://user-images.githubusercontent.com/66516553/210892900-661b8277-8fa5-41c3-8885-7fe5a4690ee8.png"
+        },
+        {
+            "grupoMuscular": "Bíceps e Costas",
+            "id": 31,
+            "nome": "PULL DOWN + PUXADA SUPINADA",
+            "repeticoes": "3X 10+12",
+            "carga": "Subindo",
+            "orientacoes": [
+                "Pull down é em pé, curvado puxando para baixo com barra longa, curta ou corda",
+                "Puxada supinada é sentado com a palma da mão virada para trás.",
+                "Incline levemente as costas para trás na puxada."
+        ],
+            "videoId": "EG1ua8lDQJA",
+            "image": "https://user-images.githubusercontent.com/66516553/210895166-7ad1ac60-bfc1-4b16-8a1a-72f8b949b432.png"
+        },
+        {
+            "grupoMuscular": "Bíceps e Costas",
+            "id": 32,
+            "nome": "BÍCEPS ROBÔ UNIL",
+            "repeticoes": "3 X 20",
+            "carga": "Conforme suportar",
+            "orientacoes": ["São 20 repetições por braço. Não exagere na carga."],
+            "videoId": "oVOL9BNuowk",
+            "image": "https://user-images.githubusercontent.com/66516553/210896311-82c78f82-dcc3-4706-994f-e37b86a70e9d.png"
+        },
+        {
+            "grupoMuscular": "Bíceps e Costas",
+            "id": 33,
+            "nome": "BÍCEPS 21",
+            "repeticoes": "3 vezes",
+            "carga": "Conforme suportar",
+            "orientacoes": [
+                "Cada série é 7 + 7 + 7",
+                "7 do início ao meio",
+                "7 do meio ao término",
+                "7 completas",
+                "São 21 repetições. Não exagere na carga"
+            ],
+            "videoId": "nC-US9vOHz8",
+            "image": "https://user-images.githubusercontent.com/66516553/210897616-36dca9b3-8d3d-4e77-be8c-730c87be9b79.png"
+        },
+        {
+            "grupoMuscular": "Bíceps e Costas",
+            "id": 34,
+            "nome": "BÍCEPS MARTELO",
+            "repeticoes": "3X10",
+            "carga": "aumentando aem cada série",
+            "orientacoes": [
+                "Costas retas",
+                "Cotovelos  ao lado do tronco",
+                "Levantar os pesos até altura do ombro",
+                "Segure no pico por dois segundos"
+            ],
+            "videoId": "5vPGH1uTtbs",
+            "image": "https://user-images.githubusercontent.com/66516553/210898648-76705310-2d8a-4644-8b2c-fd63fc9a6985.png"
+        },
+        {
+            "grupoMuscular": "Bíceps e Costas",
+            "id": 35,
+            "nome": "BÍCEPS SCOT UNIL",
+            "repeticoes": "3 x 10",
+            "carga": "aumentando aem cada série",
+            "orientacoes": [
+                "faça movimentos controlados"
+            ],
+            "videoId": "ZyisfW7q3qs",
+            "image": "https://user-images.githubusercontent.com/66516553/210899013-02300d73-700d-4209-9c35-af3a6fd3ac83.png"
+        },
+        {
+            "grupoMuscular": "Bíceps e Costas",
+            "id": 36,
+            "nome": "BÍCEPS CROSS ALTO",
+            "repeticoes": "3 x 8 ",
+            "carga": "Aumenta em cada série",
+            "orientacoes": [
+                "Polia deve estar alta",
+                "Braços paralelo ao chão",
+                "A mão deve quase encostar na cabeça",
+                "Segure no pico por 1 ou 2 segundos" 
+            ],
+            "videoId": "_yNqCUTvUWc",
+            "image": "https://user-images.githubusercontent.com/66516553/210899317-49d11bca-4f18-4738-b224-ee55c4e1201b.png"
+        },
+        {
+            "grupoMuscular": "Ombros",
+            "id": 37,
+            "nome": "DESENVOL.ARTICULADO 2pegadas",
+            "repeticoes": "3 X 10",
+            "carga": "sem exagerar",
+            "orientacoes": [
+                "Não estender 100% o braço.",
+                "Não contrair ou subir o trapézio",
+                "Costas completamente no encosto do banco."
+            ],
+            "videoId": "k0gD4uBjayA",
+            "image": "https://user-images.githubusercontent.com/66516553/209880346-a25bc0b9-f1be-4961-8420-f2a75112993e.png"
+        },
+        {
+            "grupoMuscular": "Ombros",
+            "id": 38,
+            "nome": "DESENV.ARNOLD",
+            "repeticoes": "1X12 1X10 1X8 1X6",
+            "carga": "AUMENTAR o peso entre as repetições",
+            "orientacoes": [
+                "Banco RETO com encosto para as costas",
+                "O antebraço dev ficar na posição vertical no início"
+            ],
+            "videoId": "YghvTx_GI2c",
+            "image": "https://user-images.githubusercontent.com/66516553/210132797-a5ae680c-d6a0-45d5-babd-9b1f530b1f82.png"
+        },
+        {
+            "grupoMuscular": "Ombros",
+            "id": 39,
+            "nome": "ELEVAÇÃO LATERAL com drop-set",
+            "repeticoes": "3X 8+10+12",
+            "carga": "DIMINUIR o peso entre as falhas",
+            "orientacoes": [
+                "Separe e organize as três duplas de pesos",
+                "Não descanse entre as falhas",
+                "Ombros para baixo (não contraídos p cima)",
+                "Escápulas travadas para tras",
+                "Cotovelo não ultrapassa altura do ombro",
+                "Punho pouco abaixo do cotovelo no movimento"    
+            ],
+            "videoId": "A9pbIZp8yZ4",
+            "image": "https://user-images.githubusercontent.com/66516553/210133492-1c05559d-0a96-47db-a8a3-e619ce7659cf.png"
+        },
+        {
+            "grupoMuscular": "Ombros",
+            "id": 40,
+            "nome": "ELEVA. LATERAL CROSS",
+            "repeticoes": "3 X 10",
+            "carga": "Aumentar a carga entre as repetições",
+            "orientacoes": [
+                "Cotovelos e joelhos semi-flexionados",
+                "Escápula travada",
+                "Sempre executado de forma lenta",
+                "Subir até altura do ombro"
+            ],
+            "videoId": "zZOaVUg9eZ0",
+            "image": "https://user-images.githubusercontent.com/66516553/210133775-246d98cb-25c6-42e7-b096-f9dae761020c.png"
+        },
+        {
+            "grupoMuscular": "Ombros",
+            "id": 41,
+            "nome": "ELEVA.LATERAL ARTICULADA",
+            "repeticoes": "3 X 6²+6",
+            "carga": "Conforme suportar - Isomeria",
+            "orientacoes": [
+                "Faz 6 segurando 2seg no pico + 6 comuns",
+                "Máquina da galinha pintadinha"
+            ],
+            "videoId": "7baYE_O30tY",
+            "image": "https://user-images.githubusercontent.com/66516553/210134326-b40b0e2c-ba2c-4a14-a921-5109df4542f9.png"
+        },
+        {
+            "grupoMuscular": "Ombros",
+            "id": 42,
+            "nome": "ELEVAÇÃO FRONTAL ALTERNADA",
+            "repeticoes": "3 X 10",
+            "carga": "AUMENTAR o peso entre as repetições",
+            "orientacoes": [
+                "Cotovelo alinhado com ombro.",
+                "Escápula travada",
+                "Subir até altura do ombro",
+                "Movimento deve ser lento e controlado"
+            ],
+            "videoId": "OCYdQ3hQQI4",
+            "image": "https://user-images.githubusercontent.com/66516553/210152162-4cf9470a-c11a-416c-9fd0-10fd0d4f1766.png"
+        },
+        {
+            "grupoMuscular": "Ombros",
+            "id": 43,
+            "nome": "ELEVA.SUPINADA BARRA",
+            "repeticoes": "3 X 10",
+            "carga": "AUMENTAR o peso entre as repetições",
+            "orientacoes": [
+                "A palma da mão fica para cima.",
+                "Elevar até alçtura do peito",
+                "Estabilize o corpo pondo um pé a frente do outro."
+                ],
+            "videoId": "PGGNQibvra8",
+            "image": "https://user-images.githubusercontent.com/66516553/210134737-58d18aa6-ffa7-40be-a47a-f585275375c1.png"
+        },
+        {
+            "grupoMuscular": "Ombros",
+            "id": 44,
+            "nome": "REMADA  ALTA",
+            "repeticoes": "3X 10+10+10",
+            "carga": "Aumenta em cada bloco de 10",
+            "orientacoes": [
+                "Pode ser no cross ou com alteres (lesiona menos o ombro)",
+                "Subir até altura do queixo"
+                ],
+            "videoId": "qVdQsMODm0o",
+            "image": "https://user-images.githubusercontent.com/66516553/210135359-6a3b60b3-6b9e-4a69-8b13-e1b343b21f88.png"
+        },
+        {
+            "grupoMuscular": "Ombros",
+            "id": 45,
+            "nome": "ENCOL. OMBROS CROSS",
+            "repeticoes": "3 X 20",
+            "carga": "Aumentar a cada série",
+            "orientacoes": [
+                "Deve ser uma pegada aberta."
+                ],
+            "videoId": "sX92Wnff5R4",
+            "image": "https://user-images.githubusercontent.com/66516553/210135909-0d0dc1e4-838b-409d-b781-a28882eb531c.png"
+        },
+        {
+            "grupoMuscular": "Ombros",
+            "id": 46,
+            "nome": "ELEV. LATERAL NEUTRA CROSS",
+            "repeticoes": "3 X 10",
+            "carga": "Conforme suportar",
+            "orientacoes": [
+                "Confirmar a direção do polegar."
+                ],
+            "videoId": "YkVfVtGUSAM",
+            "image": "https://user-images.githubusercontent.com/66516553/210136214-de47a54a-5566-435c-a214-b6df5b17a761.png"
+        }
+    ]
+}
