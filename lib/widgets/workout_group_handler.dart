@@ -8,6 +8,8 @@ import 'dart:convert';
 class WorkoutGroupHandler {
   Color currentColor = Color.fromARGB(0, 255, 255, 255);
 
+  String testeSt = '';
+
   List<GrupoMuscular> gruposMusculares = [
     GrupoMuscular.color(
         label: 'A: Peito e Ombros',
@@ -34,7 +36,7 @@ class WorkoutGroupHandler {
 
   Future<void> loadDataLocal() async {
     final String response =
-        await rootBundle.loadString('assets/json/series.json');
+        await rootBundle.loadString(AppConstants.seriesAssetJson);
 
     final jsonMapFromLocalJson = await json.decode(response);
 

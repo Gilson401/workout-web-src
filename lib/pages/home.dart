@@ -64,6 +64,9 @@ void forceRerender(){
 
   @override
   Widget build(BuildContext context) {
+
+    print('Context Home ${context.hashCode}');
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -82,19 +85,7 @@ void forceRerender(){
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Column(
-              children: [               
-                WorkoutGroup(setWorkout: setCurrentWorkout, key: apiItemsListKey, reRenderFn: widget.reRenderFn,),
-              ],
-            ),
-          ],
-        ),
-      ),
+      body: WorkoutGroup(setWorkout: setCurrentWorkout, key: apiItemsListKey, reRenderFn: widget.reRenderFn,),
       bottomNavigationBar: BottomAppBar(
         elevation: 10,
         color: Colors.white,

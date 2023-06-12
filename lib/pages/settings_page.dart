@@ -1,8 +1,10 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/di/inject.dart';
+import 'package:hello_flutter/widgets/workout_group_handler.dart';
 import 'package:hello_flutter/utils/local_storage_workout_handler.dart';
 import 'package:hello_flutter/utils/workout.dart';
-import 'package:hello_flutter/widgets/workout_group_handler.dart';
 
 class SettingsPage extends StatefulWidget {
   final Function? reRenderFn;
@@ -25,7 +27,13 @@ class _SettingsPageState extends State<SettingsPage> {
       _gruposMuscularUniqueLabels =
           _workoutGroupHandler.gruposMuscularUniqueLabels();
     });
-    print(_workoutGroupHandler);
+  }
+
+  Color getColorByLabel(String st) {
+    Color temp = _workoutGroupHandler.gruposMusculares
+        .firstWhere((element) => element.label == st)
+        .color;
+    return temp;
   }
 
   @override
@@ -45,22 +53,23 @@ class _SettingsPageState extends State<SettingsPage> {
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         child: ListView(
           children: <Widget>[
+            Text(_workoutGroupHandler.testeSt),
             SizedBox(height: 10),
             for (String st in _gruposMuscularUniqueLabels)
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: ElevatedButton(
                   style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(getColorByLabel(st)),
                     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                       EdgeInsets.all(20.0),
                     ),
                   ),
                   onPressed: () {
-    
                     List<Workout> listWorkout =
                         _workoutGroupHandler.workoutListFromGroup(st);
                     for (Workout wk in listWorkout) {
-
                       wk.setSeriesFeitas(0);
                       localStorageManager.saveWorkoutData(wk);
                       if (widget.reRenderFn != null) {
@@ -68,18 +77,36 @@ class _SettingsPageState extends State<SettingsPage> {
                       }
                     }
 
-                    final snackBar = SnackBar(
-                      content: Text(
-                          'Repetições de $st foram limpas em Local Storage'),
-                      duration: Duration(seconds: 2),
-                      behavior: SnackBarBehavior
-                          .floating, 
-                      margin: EdgeInsets.symmetric(
-                          vertical: 16.0,
-                          horizontal:
-                              16.0), 
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    // final snackBar = SnackBar(
+                    //   content: Text(
+                    //       'Repetições de $st foram limpas em Local Storage'),
+                    //   duration: Duration(seconds: 2),
+                    //   behavior: SnackBarBehavior
+                    //       .floating,
+                    //   margin: EdgeInsets.symmetric(
+                    //       vertical: 16.0,
+                    //       horizontal:
+                    //           16.0),
+                    // );
+                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return SimpleDialog(
+                            title: Text('Feito!'),
+                            contentPadding: EdgeInsets.all(25),
+                            children: [
+                              Text(
+                                  'Repetições de $st foram limpas em Local Storage'),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('Fechar'))
+                            ],
+                          );
+                        });
                   },
                   child: Text('Limpar repetições de $st'),
                 ),

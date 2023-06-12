@@ -55,7 +55,7 @@ class WorkoutGroupState extends State<WorkoutGroup> {
   }
 
   var forceRender = 1;
-  var _items = [];
+  List<Workout> _items = [];
 
   List<Workout> _displayItems = [];
   List<Workout> _listWorkout = [];
@@ -76,7 +76,7 @@ class WorkoutGroupState extends State<WorkoutGroup> {
 
   Future<void> _loadDataLocal() async {
     final String response =
-        await rootBundle.loadString('assets/json/series.json');
+        await rootBundle.loadString(AppConstants.seriesAssetJson);
 
     final jsonMapFromLocalJson = await json.decode(response);
 
@@ -118,10 +118,13 @@ class WorkoutGroupState extends State<WorkoutGroup> {
   //   }
   // }
 
-  _filterExercicesDisplayList(GrupoMuscular grupoMuscular) {
+  void _filterExercicesDisplayList(GrupoMuscular grupoMuscular) {
     List<Workout> filtredList = _listWorkout
         .where((element) => element.grupoMuscular == grupoMuscular.label)
         .toList();
+
+    sortDisplayListByLastDayDone(filtredList);
+
     resetCurrentWorkoutIndex();
     setState(() {
       _displayItems = filtredList;
@@ -129,8 +132,45 @@ class WorkoutGroupState extends State<WorkoutGroup> {
     });
   }
 
+  void sortDisplayListByLastDayDone(List<Workout> filtredList) {
+    filtredList.sort((a, b) => getLastTenCharacters(a.lastDayDone)
+        .compareTo((getLastTenCharacters(b.lastDayDone))));
+  }
+
   List<dynamic> gruposMusc() {
     return _items.map((exercicio) => exercicio.grupoMuscular).toList();
+  }
+
+  String getLastTenCharacters(String text) {
+    if (text.length <= 10) {
+      return text;
+    } else {
+      return text.substring(text.length - 10);
+    }
+  }
+
+  String _findLatestDate(GrupoMuscular grupo) {
+    List<Workout> temp = [..._items];
+
+    temp.sort((a, b) => getLastTenCharacters(a.lastDayDone)
+        .compareTo((getLastTenCharacters(b.lastDayDone))));
+
+    String tempSt = "";
+
+    try {
+      tempSt = temp
+          .where((element) {
+            return grupo.label == element.grupoMuscular &&
+                element.lastDayDone != "";
+          })
+          .map((element) => element.lastDayDone)
+          .toList()
+          .last;
+    } catch (e) {
+      print('LOG $e');
+    }
+
+    return tempSt;
   }
 
   Widget groupMusclesButtons() {
@@ -150,20 +190,25 @@ class WorkoutGroupState extends State<WorkoutGroup> {
                   margin: const EdgeInsets.all(2),
                   padding: const EdgeInsets.all(5),
                   width: 90,
-                  height: 110,
                   decoration: BoxDecoration(
                       color: gruposMusculares[i].color,
                       borderRadius: BorderRadius.all(Radius.circular(12))),
                   child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(gruposMusculares[i].label,
-                            textAlign: TextAlign.center),
+                        Expanded(
+                          flex: 1,
+                          child: Text(gruposMusculares[i].label,
+                              textAlign: TextAlign.center),
+                        ),
                         SizedBox(
-                          width: 100,
-                          height: 50,
+                          // width: 50,
+                          height: 40,
                           child: showImage(gruposMusculares[i]),
-                        )
+                        ),
+                        Text(_findLatestDate(gruposMusculares[i]),
+                            textAlign: TextAlign.center),
                       ])),
             ),
         ],
@@ -186,9 +231,9 @@ class WorkoutGroupState extends State<WorkoutGroup> {
     }
   }
 
-  Widget itemsListViewBulder() {
+  ListView itemsListViewBulder() {
     return ListView.builder(
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      // padding: const EdgeInsets.symmetric(vertical: 20.0),
       itemCount: _displayItems.length,
       itemBuilder: (BuildContext context, int position) {
         return _buildRow(position);
@@ -206,22 +251,37 @@ class WorkoutGroupState extends State<WorkoutGroup> {
             workout: itemsLocally[position],
             currentWorkoutId: _currentWorkoutId,
             setWorkout: _onListTileClick,
-            reRenderFn: widget.reRenderFn));
+            reRenderFn: () {
+              sortDisplayListByLastDayDone(_displayItems);
+              widget.reRenderFn();
+            }));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            child: Center(child: groupMusclesButtons())),
-        SizedBox(height: 590, child: itemsListViewBulder()),
-        SizedBox(height: 10.0)
-      ],
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return SizedBox(
+            width: constraints.maxWidth,
+            height: constraints.maxHeight,
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Center(child: groupMusclesButtons())),
+                ),
+                Expanded(
+                  flex: 14,
+                  child: itemsListViewBulder(),
+                ),
+              ],
+            ));
+      },
     );
   }
 }

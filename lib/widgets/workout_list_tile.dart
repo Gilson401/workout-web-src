@@ -49,13 +49,18 @@ class _WorkoutListTileState extends State<WorkoutListTile> with DateFunctions {
     super.initState();
   }
 
+bool isTodayDone() => widget.workout.lastDayDone == dateCurrent;
+
   @override
   Widget build(BuildContext context) {
+
+    // print('Context Workout ListTile ${context.hashCode}');
+
     return ListTile(
-        tileColor: widget.currentColor,
+        tileColor: isTodayDone() ?  widget.currentColor.withOpacity(0.99) : widget.currentColor,
         selectedTileColor: widget.currentColor.withOpacity(0.99),
         selected: widget.currentWorkoutId == widget.workout.id,
-        trailing: widget.workout.lastDayDone == dateCurrent
+        trailing: isTodayDone()
             ? Icon(Icons.check_circle_outline)
             : Icon(Icons.circle_outlined),
         shape: RoundedRectangleBorder(
@@ -69,13 +74,17 @@ class _WorkoutListTileState extends State<WorkoutListTile> with DateFunctions {
               fontSize: 17, fontFamily: 'Raleway', fontWeight: FontWeight.w700),
         ),
         subtitle: ClipRect(
-          child: Wrap(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (widget.workout.lastDayDone != "")
                 Text(widget.workout.lastDayDone, style: _font),
               SizedBox(width: 15),
+              Row(children: [
+
               for (var i = 0; i < widget.workout.seriesFeitas; i++)
                 Icon(Icons.check_circle_outline, color: Colors.black, size: 16),
+              ],)
             ],
           ),
         ),
@@ -97,7 +106,10 @@ class _WorkoutListTileState extends State<WorkoutListTile> with DateFunctions {
                       ),
                       reRenderFn: widget.reRenderFn,
                     )),
-          );
+          ).then((result) {
+            widget.reRenderFn();
+  print('Retornou para a lista');
+});
         });
   }
 }

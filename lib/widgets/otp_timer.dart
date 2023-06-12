@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/utils/app_controller.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:hello_flutter/utils/app_constants.dart';
 
 enum PercentDisplaMode {
   circle,
@@ -18,7 +19,8 @@ class OtpTimer extends StatefulWidget {
 
 class OtpTimerState extends State<OtpTimer> {
   final interval = const Duration(seconds: 1);
-
+  final ButtonStyle raisedButtonStyle  = AppConstants.raisedButtonStyle;
+  
   int timerMaxSeconds = 0;
 
   int currentSeconds = 0;
@@ -26,15 +28,7 @@ class OtpTimerState extends State<OtpTimer> {
   String get timerText =>
       '${((timerMaxSeconds - currentSeconds) ~/ 60).toString().padLeft(2, '0')}:${((timerMaxSeconds - currentSeconds) % 60).toString().padLeft(2, '0')}';
 
-  final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
-    foregroundColor: Colors.black87,
-    backgroundColor: Colors.grey[300],
-    minimumSize: Size(88, 36),
-    padding: EdgeInsets.symmetric(horizontal: 16),
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(2)),
-    ),
-  );
+
 
   bool _stopTimer = false;
 

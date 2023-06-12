@@ -136,10 +136,11 @@
             "repeticoes": "3 x (8 + 8 + 8)",
             "carga": "Conforme suportar",
             "orientacoes": [
-                "Use a barra que tem três pegadas neutras. 8 puxadas para cada"
+                "Use a barra que tem três pegadas neutras. 8 puxadas para cada.",
+                "Foque no lateral, evite requisitar o bíceps."
             ],
             "videoId": "Xn-fIQw08q4",
-            "image": "https://user-images.githubusercontent.com/66516553/233810632-8907caeb-1adb-49fc-a5dc-1beef29b609e.png"
+            "image": "https://github.com/Gilson401/json_placeholder/assets/66516553/c506403e-3c14-48c5-8e0d-7f3ed941a631"
         },
 
         {
@@ -477,7 +478,7 @@
         {
             "grupoMuscular": "D: Bíceps e Tríceps",
             "id": 80,
-            "nome": "Biceps pron. barra + rotação punho",
+            "nome": "Biceps pron. barra",
             "repeticoes": "4 x 12",
             "carga": "Conforme suportar",
             "orientacoes": [
