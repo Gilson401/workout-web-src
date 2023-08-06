@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 import 'package:hello_flutter/pages/settings_page.dart';
 import 'package:hello_flutter/utils/timer_periodic.dart';
 import 'package:hello_flutter/utils/workout.dart';
@@ -8,8 +9,8 @@ import 'package:hello_flutter/widgets/workout_group.dart';
 import 'package:hello_flutter/widgets/clocktimer_page.dart';
 
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-class Home extends StatefulWidget {
 
+class Home extends StatefulWidget {
   final Function reRenderFn;
   final String title;
   const Home({super.key, required this.title, required this.reRenderFn});
@@ -19,8 +20,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-final apiItemsListKey =  GlobalKey<WorkoutGroupState>();
+  final apiItemsListKey = GlobalKey<WorkoutGroupState>();
 
   final _controller = YoutubePlayerController.fromVideoId(
     videoId: '',
@@ -38,8 +38,10 @@ final apiItemsListKey =  GlobalKey<WorkoutGroupState>();
 
   @override
   void initState() {
-    super.initState();
+    super.initState();    
   }
+
+
 
   TimePeriodic timePeriodic60 =
       TimePeriodic(stopTimer: true, currentSeconds: 0, timerMaxSeconds: 60);
@@ -56,15 +58,14 @@ final apiItemsListKey =  GlobalKey<WorkoutGroupState>();
     timePeriodic60.stopTimer = true;
   }
 
-
-
-void forceRerender(){
-  apiItemsListKey.currentState!.updateWithLocalStorage().then((value) => setState(() {}),);
-}
+  void forceRerender() {
+    apiItemsListKey.currentState!.updateWithLocalStorage().then(
+          (value) => setState(() {}),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
-
     print('Context Home ${context.hashCode}');
 
     return Scaffold(
@@ -76,16 +77,20 @@ void forceRerender(){
             icon: const Icon(Icons.settings),
             tooltip: 'Settings',
             onPressed: () {
-               Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => SettingsPage(
-                        reRenderFn: forceRerender
-                      )),
-                    );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (context) =>
+                        SettingsPage(reRenderFn: forceRerender)),
+              );
             },
           ),
         ],
       ),
-      body: WorkoutGroup(setWorkout: setCurrentWorkout, key: apiItemsListKey, reRenderFn: widget.reRenderFn,),
+      body: WorkoutGroup(
+        setWorkout: setCurrentWorkout,
+        key: apiItemsListKey,
+        reRenderFn: widget.reRenderFn,
+      ),
       bottomNavigationBar: BottomAppBar(
         elevation: 10,
         color: Colors.white,

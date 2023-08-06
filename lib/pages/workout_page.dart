@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hello_flutter/database/workout_database_model.dart';
 import 'package:hello_flutter/utils/app_constants.dart';
 import 'package:hello_flutter/utils/app_controller.dart';
 import 'package:hello_flutter/utils/local_storage_workout_handler.dart';
@@ -10,6 +11,8 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:hello_flutter/widgets/timer_button.dart';
 import 'package:hello_flutter/di/inject.dart';
 import 'package:hello_flutter/widgets/workout_group_handler.dart';
+import 'package:hello_flutter/database/database_manager.dart';
+
 class WorkoutPage extends StatefulWidget {
   final Workout _seletctedWorkout;
   final TextStyle textStyle;
@@ -31,6 +34,8 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
   LocalStorageWorkoutHandler localStorageManager = LocalStorageWorkoutHandler();
 
   final _workoutGroupHandler = inject<WorkoutGroupHandler>();
+
+  final _dbManager = inject<DatabaseManager>();
 
   String? _temporaryCarga;
   String? _videoTitle;
@@ -211,8 +216,8 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
       widget.reRenderFn!();
     }
 
-    _workoutGroupHandler.testeSt = widget._seletctedWorkout.seriesFeitas.toString();
-
+    _workoutGroupHandler.testeSt =
+        widget._seletctedWorkout.seriesFeitas.toString();
   }
 
   Widget timerButtons() {
@@ -231,7 +236,6 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
 
   List<Widget> workoutInstructions() {
     return [
-      Text(_workoutGroupHandler.testeSt),
       for (var i = 0; i < widget._seletctedWorkout.orientacoes!.length; i++)
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
@@ -273,7 +277,8 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
                   widget.reRenderFn!();
                 }
 
-                _workoutGroupHandler.testeSt = widget._seletctedWorkout.seriesFeitas.toString();
+                _workoutGroupHandler.testeSt =
+                    widget._seletctedWorkout.seriesFeitas.toString();
               }
             }),
         Expanded(
@@ -295,15 +300,12 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
     );
   }
 
-
   SizedBox columSpacer(double height) => SizedBox(height: height);
 
   SizedBox rowSpacer(double width) => SizedBox(width: width);
 
   @override
   Widget build(BuildContext context) {
-    
-    
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -524,7 +526,16 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
     if (_temporaryCarga != null || _temporaryCarga != '') {
       widget._seletctedWorkout.setCurrentCarga(_temporaryCarga!);
       localStorageManager.saveWorkoutData(widget._seletctedWorkout);
+
+      var data = WorkoutDatabaseModel(
+          carga: _temporaryCarga!,
+          data: currentDateYYYYMMDD(),
+          workoutId: widget._seletctedWorkout.id);
+
+      // _dbManager.insertItem(table: 'workouts', data: data);
+
       Navigator.of(context).pop();
+
       uiHelpers.dialog(
           context: context, title: "Feito.", message: '''Nova carga armazenada: 
           $_temporaryCarga''');

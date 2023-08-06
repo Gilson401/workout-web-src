@@ -3,6 +3,8 @@
    <uses-permission android:name="android.permission.VIBRATE"/>
    <application
         android:label="MyWorkout"
+        android:allowBackup="false"
+        android:fullBackupOnly="false"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

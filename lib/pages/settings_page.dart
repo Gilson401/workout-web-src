@@ -5,6 +5,7 @@ import 'package:hello_flutter/di/inject.dart';
 import 'package:hello_flutter/widgets/workout_group_handler.dart';
 import 'package:hello_flutter/utils/local_storage_workout_handler.dart';
 import 'package:hello_flutter/utils/workout.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatefulWidget {
   final Function? reRenderFn;
@@ -17,7 +18,10 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   LocalStorageWorkoutHandler localStorageManager = LocalStorageWorkoutHandler();
-
+  final  _url = 'https://flutter.dev';
+  final  _mySite = 'https://gilsonpaulo.com.br';
+  final  _footstats = 'https://footstatsi2a.com/politica-de-privacidade';
+  
   final _workoutGroupHandler = inject<WorkoutGroupHandler>();
   List<String> _gruposMuscularUniqueLabels = [];
 
@@ -40,6 +44,13 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     loadLocalJsonData();
     super.initState();
+  }
+
+  Future<void> _launchUrl(String url) async {
+        
+    if (!await launchUrl(Uri.parse(url))) {
+      throw Exception('Could not launch $_url');
+    }
   }
 
   @override
@@ -112,6 +123,21 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: (){_launchUrl(_mySite);},
+              child: Text('Meu site'),
+            ),
+
+            ElevatedButton(
+              onPressed: (){_launchUrl(_url);},
+              child: Text('Show Flutter homepage'),
+            ),
+
+            ElevatedButton(
+              onPressed: (){_launchUrl(_footstats);},
+              child: Text('Show Footstats'),
+            ),
+
           ],
         ),
       ),

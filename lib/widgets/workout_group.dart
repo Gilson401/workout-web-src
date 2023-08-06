@@ -133,7 +133,7 @@ class WorkoutGroupState extends State<WorkoutGroup> {
   }
 
   void sortDisplayListByLastDayDone(List<Workout> filtredList) {
-    filtredList.sort((a, b) => getLastTenCharacters(a.lastDayDone)
+    filtredList.sort(( a, b) => getLastTenCharacters(a.lastDayDone)
         .compareTo((getLastTenCharacters(b.lastDayDone))));
   }
 
@@ -144,32 +144,44 @@ class WorkoutGroupState extends State<WorkoutGroup> {
   String getLastTenCharacters(String text) {
     if (text.length <= 10) {
       return text;
-    } else {
-      return text.substring(text.length - 10);
     }
+    String data = text.substring(text.length - 10);
+
+    List<String> partes = data.split('/');
+    String dia = partes[0];
+    String mes = partes[1];
+    String ano = partes[2];
+
+    return '$ano-$mes-$dia';
   }
 
-  String _findLatestDate(GrupoMuscular grupo) {
-    List<Workout> temp = [..._items];
-
-    temp.sort((a, b) => getLastTenCharacters(a.lastDayDone)
-        .compareTo((getLastTenCharacters(b.lastDayDone))));
+  String _findLatestDate(GrupoMuscular grupoMuscular) {
+    List<Workout> exerciciosDoGrupoComLastDoneDay = [];
 
     String tempSt = "";
 
     try {
-      tempSt = temp
-          .where((element) {
-            return grupo.label == element.grupoMuscular &&
-                element.lastDayDone != "";
-          })
+      exerciciosDoGrupoComLastDoneDay = [..._items].where((element) {
+        return grupoMuscular.label == element.grupoMuscular &&
+            element.lastDayDone != "";
+      }).toList();
+
+      if (exerciciosDoGrupoComLastDoneDay.isEmpty) {
+        return 'NoDate';
+      }
+
+      exerciciosDoGrupoComLastDoneDay.sort((a, b) =>
+          getLastTenCharacters(a.lastDayDone)
+              .compareTo((getLastTenCharacters(b.lastDayDone))));
+   
+
+      tempSt = exerciciosDoGrupoComLastDoneDay
           .map((element) => element.lastDayDone)
           .toList()
           .last;
     } catch (e) {
-      print('LOG $e');
+      print('LOG err $e');
     }
-
     return tempSt;
   }
 

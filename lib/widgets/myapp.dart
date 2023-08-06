@@ -27,10 +27,10 @@ class _AppState extends State<App> {
           return MaterialApp(
               title: 'Home Workout App',
               debugShowCheckedModeBanner: false,
+              // ignore: deprecated_member_use
               useInheritedMediaQuery: true,
               theme: ThemeData(
-                primarySwatch: Colors.cyan,
-                backgroundColor: Color.fromARGB(121, 247, 247, 247),
+                colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan).copyWith(background: Color.fromARGB(121, 247, 247, 247)),
               ),
               home:
                  Home(title: 'Meus Exercícios', reRenderFn: reRender)

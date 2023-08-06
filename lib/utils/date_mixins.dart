@@ -8,16 +8,20 @@ class DateFunctions {
   }
 
   String _getDiaDaSemana(int dayNumber) {
-  List<String> weekDays = [
-    'Seg',
-    'Ter',
-    'Qua',
-    'Qui',
-    'Sex',
-    'Sáb',
-    'Dom',
-  ];
-  return weekDays[dayNumber - 1];
-}
+    List<String> weekDays = [
+      'Seg',
+      'Ter',
+      'Qua',
+      'Qui',
+      'Sex',
+      'Sáb',
+      'Dom',
+    ];
+    return weekDays[dayNumber - 1];
+  }
 
+  String currentDateYYYYMMDD() {
+    DateTime dataAtual = DateTime.now();
+    return '${dataAtual.year}-${dataAtual.month}-${dataAtual.day}';
+  }
 }
