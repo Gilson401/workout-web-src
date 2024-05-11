@@ -1,10 +1,8 @@
-// import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/di/inject.dart';
 import 'package:hello_flutter/home/view/widgets/workout_group_handler.dart';
-import 'package:hello_flutter/utils/local_storage_workout_handler.dart';
-import 'package:hello_flutter/utils/workout.dart';
+import 'package:hello_flutter/home/controller/local_storage_workout_handler.dart';
+import 'package:hello_flutter/home/model/workout.dart';
 class SettingsPage extends StatefulWidget {
   final Function? reRenderFn;
 

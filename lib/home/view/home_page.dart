@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 
 import 'package:hello_flutter/pages/settings_page.dart';
 import 'package:hello_flutter/utils/timer_periodic.dart';
-import 'package:hello_flutter/utils/workout.dart';
+import 'package:hello_flutter/home/model/workout.dart';
 import 'package:hello_flutter/home/view/widgets/timer_button.dart';
 import 'package:hello_flutter/home/view/widgets/workout_group.dart';
 import 'package:hello_flutter/home/view/widgets/clocktimer_page.dart';
 
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-class Home extends StatefulWidget {
+class HomePage extends StatefulWidget {
   final Function reRenderFn;
   final String title;
-  const Home({super.key, required this.title, required this.reRenderFn});
+  const HomePage({super.key, required this.title, required this.reRenderFn});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeState extends State<Home> {
+class _HomePageState extends State<HomePage> {
   final apiItemsListKey = GlobalKey<WorkoutGroupState>();
 
   final _controller = YoutubePlayerController.fromVideoId(

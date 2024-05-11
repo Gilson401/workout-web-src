@@ -1,7 +1,7 @@
 import 'package:hello_flutter/utils/app_constants.dart';
 import 'package:hello_flutter/utils/date_mixins.dart';
-import 'package:hello_flutter/utils/local_storage.dart';
-import 'package:hello_flutter/utils/workout.dart';
+import 'package:hello_flutter/home/controller/local_storage.dart';
+import 'package:hello_flutter/home/model/workout.dart';
 
 
 class LocalStorageWorkoutHandler with DateFunctions, SharePreferencesImpl {

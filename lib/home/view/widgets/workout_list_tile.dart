@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/di/inject.dart';
-import 'package:hello_flutter/pages/workout_page.dart';
+import 'package:hello_flutter/home/view/workout_page.dart';
 import 'package:hello_flutter/utils/app_constants.dart';
 import 'package:hello_flutter/utils/date_mixins.dart';
-import 'package:hello_flutter/utils/local_storage.dart';
-import 'package:hello_flutter/utils/local_storage_workout_handler.dart';
-import 'package:hello_flutter/utils/workout.dart';
+import 'package:hello_flutter/home/controller/local_storage.dart';
+import 'package:hello_flutter/home/controller/local_storage_workout_handler.dart';
+import 'package:hello_flutter/home/model/workout.dart';
 
 class WorkoutListTile extends StatefulWidget {
   final Color currentColor;

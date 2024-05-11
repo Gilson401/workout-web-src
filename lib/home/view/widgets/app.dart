@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/utils/app_controller.dart';
-import 'package:hello_flutter/home/view/home_view.dart';
+import 'package:hello_flutter/home/view/home_page.dart';
 import 'package:hello_flutter/home/view/widgets/responsive_wrapper.dart';
 
 class App extends StatefulWidget {
@@ -31,7 +31,7 @@ class _AppState extends State<App> {
                 colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan, backgroundColor: Colors.white) .copyWith(background: Colors.white),
               ),
               home: ResponsiveWrapper(
-                child:  Home(title: 'Meus Exercícios', reRenderFn: reRender),
+                child:  HomePage(title: 'Meus Exercícios', reRenderFn: reRender),
               )
             );
         });

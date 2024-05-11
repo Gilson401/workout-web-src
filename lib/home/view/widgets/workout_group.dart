@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/utils/grupo_muscular.dart';
-import 'package:hello_flutter/utils/local_storage_workout_handler.dart';
-import 'package:hello_flutter/utils/workout.dart';
+import 'package:hello_flutter/home/model/grupo_muscular.dart';
+import 'package:hello_flutter/home/controller/local_storage_workout_handler.dart';
+import 'package:hello_flutter/home/model/workout.dart';
 import 'package:hello_flutter/utils/app_constants.dart';
 import 'package:hello_flutter/home/view/widgets/workout_list_tile.dart';
 import 'package:flutter_svg/flutter_svg.dart';
