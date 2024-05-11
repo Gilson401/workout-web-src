@@ -1,4 +1,4 @@
-# hello_flutter
+# workout-web-src
 
 Trata-se de um projeto flutter: Um app para gestão de exercícios físicos.
 Aplica o padrão de design MVC.
