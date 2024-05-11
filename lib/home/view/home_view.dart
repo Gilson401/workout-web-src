@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:hello_flutter/pages/settings_page.dart';
 import 'package:hello_flutter/utils/timer_periodic.dart';
 import 'package:hello_flutter/utils/workout.dart';
-import 'package:hello_flutter/widgets/timer_button.dart';
-import 'package:hello_flutter/widgets/workout_group.dart';
-import 'package:hello_flutter/widgets/clocktimer_page.dart';
+import 'package:hello_flutter/home/view/widgets/timer_button.dart';
+import 'package:hello_flutter/home/view/widgets/workout_group.dart';
+import 'package:hello_flutter/home/view/widgets/clocktimer_page.dart';
 
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -68,6 +68,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(widget.title),
         elevation: 10,

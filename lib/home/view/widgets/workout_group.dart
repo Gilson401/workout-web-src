@@ -3,7 +3,7 @@ import 'package:hello_flutter/utils/grupo_muscular.dart';
 import 'package:hello_flutter/utils/local_storage_workout_handler.dart';
 import 'package:hello_flutter/utils/workout.dart';
 import 'package:hello_flutter/utils/app_constants.dart';
-import 'package:hello_flutter/widgets/workout_list_tile.dart';
+import 'package:hello_flutter/home/view/widgets/workout_list_tile.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -228,7 +228,6 @@ class WorkoutGroupState extends State<WorkoutGroup> {
 
   ListView itemsListViewBulder() {
     return ListView.builder(
-      // padding: const EdgeInsets.symmetric(vertical: 20.0),
       itemCount: _displayItems.length,
       itemBuilder: (BuildContext context, int position) {
         return _buildRow(position);

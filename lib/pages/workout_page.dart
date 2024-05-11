@@ -6,11 +6,11 @@ import 'package:hello_flutter/utils/local_storage_workout_handler.dart';
 import 'package:hello_flutter/utils/ui_helpers.dart';
 import 'package:hello_flutter/utils/workout.dart';
 import 'package:hello_flutter/utils/date_mixins.dart';
-import 'package:hello_flutter/widgets/responsive_wrapper.dart';
+import 'package:hello_flutter/home/view/widgets/responsive_wrapper.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:hello_flutter/widgets/timer_button.dart';
+import 'package:hello_flutter/home/view/widgets/timer_button.dart';
 import 'package:hello_flutter/di/inject.dart';
-import 'package:hello_flutter/widgets/workout_group_handler.dart';
+import 'package:hello_flutter/home/view/widgets/workout_group_handler.dart';
 
 class WorkoutPage extends StatefulWidget {
   final Workout _seletctedWorkout;
