@@ -34,13 +34,7 @@ class WorkoutGroupHandler {
 
   List<WorkoutModel> _workoutItemsFromLocalJson = [];
 
-  Future<void> loadDataLocal() async {
-    final String response =
-        await rootBundle.loadString(AppConstants.seriesAssetJson);
-
-    final jsonMapFromLocalJson = await json.decode(response);
-
-    List<dynamic> exerciciosFromJson = jsonMapFromLocalJson['exercicios'];
+  Future<void> loadDataLocal(List<dynamic> exerciciosFromJson) async {
 
     List<WorkoutModel> parsedListWorkout =
         exerciciosFromJson.map((element) => WorkoutModel.fromJson(element)).toList();
@@ -48,6 +42,7 @@ class WorkoutGroupHandler {
     _workoutItemsFromLocalJson = parsedListWorkout;
 
     await _updateWithLocalStorage();
+    
   }
 
   Future<void> _updateWithLocalStorage() async {

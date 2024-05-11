@@ -4,7 +4,13 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class HomeController {
+
+
   HomeController({Key? key});
+
+
+List<dynamic> _loadedWorkouts = [];
+List<dynamic> get loadedWorkouts => _loadedWorkouts;
 
   Future<List<dynamic>> loadData() async {
     List<dynamic> decoded = [{}];
@@ -12,7 +18,7 @@ class HomeController {
       http.Response response =
           await http.get(Uri.parse(UrlConstants.workoutApi));
       decoded = jsonDecode(response.body);
-      
+      _loadedWorkouts = decoded; 
     } catch (err) {
       throw Exception(err.toString());
     }

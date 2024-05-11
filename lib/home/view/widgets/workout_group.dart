@@ -152,7 +152,7 @@ class WorkoutGroupState extends State<WorkoutGroup> {
       }).toList();
 
       if (exerciciosDoGrupoComLastDoneDay.isEmpty) {
-        return 'NoDate';
+        return '';
       }
 
       exerciciosDoGrupoComLastDoneDay.sort((a, b) =>
@@ -261,7 +261,7 @@ class WorkoutGroupState extends State<WorkoutGroup> {
             child: Column(
               children: [
                 Expanded(
-                  flex: 3,
+                  flex: 4,
                   child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(

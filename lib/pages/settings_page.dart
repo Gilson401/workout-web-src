@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/di/inject.dart';
+import 'package:hello_flutter/home/controller/home_controller.dart';
 import 'package:hello_flutter/home/view/widgets/workout_group_handler.dart';
 import 'package:hello_flutter/home/repository/local_storage_workout_handler.dart';
 import 'package:hello_flutter/home/model/workout_model.dart';
+
 class SettingsPage extends StatefulWidget {
   final Function? reRenderFn;
 
@@ -14,12 +16,14 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   LocalStorageWorkoutHandler localStorageManager = LocalStorageWorkoutHandler();
-  
+
+  final controller = inject<HomeController>();
+
   final _workoutGroupHandler = inject<WorkoutGroupHandler>();
   List<String> _gruposMuscularUniqueLabels = [];
 
   Future<void> loadLocalJsonData() async {
-    await _workoutGroupHandler.loadDataLocal();
+    await _workoutGroupHandler.loadDataLocal(await controller.loadData());
     setState(() {
       _gruposMuscularUniqueLabels =
           _workoutGroupHandler.gruposMuscularUniqueLabels();
@@ -38,7 +42,6 @@ class _SettingsPageState extends State<SettingsPage> {
     loadLocalJsonData();
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -93,12 +96,10 @@ class _SettingsPageState extends State<SettingsPage> {
                           );
                         });
                   },
-                  child: Text('Limpar repetições de $st'),
+                  child: Text('Limpar repetições de $st', style: TextStyle(color: Colors.black),),
                 ),
               ),
             SizedBox(height: 10),
-           
-
           ],
         ),
       ),
