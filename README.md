@@ -1,16 +1,15 @@
 # hello_flutter
 
-A new Flutter project.
+Trata-se de um projeto flutter: Um app para gestão de exercícios físicos.
+Aplica o padrão de design MVC.
+
+A versão de build web utiliza o armazenamento local via pacote shared_preferences.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Para executar este projeto, utilize a versão 3.19 do flutter. Clone o repositório, e execute o comando  "flutter run" com a opção para o dispositivo desejado.
 
-A few resources to get you started if this is your first Flutter project:
+Uma versão em produção deste app foi publicada em :
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Hello Flutter Workout](https://gilson401.github.io/workout-web/)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
