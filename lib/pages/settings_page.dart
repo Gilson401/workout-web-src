@@ -75,19 +75,6 @@ class _SettingsPageState extends State<SettingsPage> {
                       }
                     }
 
-                    // final snackBar = SnackBar(
-                    //   content: Text(
-                    //       'Repetições de $st foram limpas em Local Storage'),
-                    //   duration: Duration(seconds: 2),
-                    //   behavior: SnackBarBehavior
-                    //       .floating,
-                    //   margin: EdgeInsets.symmetric(
-                    //       vertical: 16.0,
-                    //       horizontal:
-                    //           16.0),
-                    // );
-                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
                     showDialog(
                         context: context,
                         builder: (context) {

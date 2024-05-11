@@ -314,9 +314,6 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
           actions: [
             PopupMenuButton<String>(
               key: popMenuKey,
-              //   onSelected: (value) {
-      
-              //  },
               itemBuilder: (BuildContext context) => [
                 PopupMenuItem<String>(
                   value: 'reset',

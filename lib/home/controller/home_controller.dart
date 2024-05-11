@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, must_be_immutable
-
 import 'package:flutter/cupertino.dart';
 
 class HomeController extends InheritedNotifier<ValueNotifier<int>> {
+  
+  final String homeControllerStringVar = "Text stored in homeControllerStringVar ";
+
   HomeController({Key? key, required Widget child})
       : super(
           key: key,
@@ -11,7 +12,6 @@ class HomeController extends InheritedNotifier<ValueNotifier<int>> {
         );
 
   int get value => notifier!.value;
-  String homeControllerStringVar = "Text stored in homeControllerStringVar ";
 
   increment() {
     notifier!.value++;

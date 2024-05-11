@@ -198,7 +198,6 @@ class WorkoutGroupState extends State<WorkoutGroup> {
                               textAlign: TextAlign.center),
                         ),
                         SizedBox(
-                          // width: 50,
                           height: 40,
                           child: showImage(gruposMusculares[i]),
                         ),

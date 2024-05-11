@@ -89,8 +89,6 @@ class OtpTimerState extends State<OtpTimer> {
                 fontFamily: 'Raleway',
                 fontWeight: FontWeight.w700),
           ),
-          // center: Icon(Icons.timer, color: Color.fromARGB(255, 2, 55, 99)),
-
           backgroundColor: Color.fromARGB(255, 111, 207, 245),
           progressColor: Color.fromARGB(255, 2, 55, 99),
         ),
