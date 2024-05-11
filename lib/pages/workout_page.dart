@@ -11,7 +11,6 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:hello_flutter/widgets/timer_button.dart';
 import 'package:hello_flutter/di/inject.dart';
 import 'package:hello_flutter/widgets/workout_group_handler.dart';
-import 'package:hello_flutter/database/database_manager.dart';
 
 class WorkoutPage extends StatefulWidget {
   final Workout _seletctedWorkout;
@@ -35,7 +34,6 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
 
   final _workoutGroupHandler = inject<WorkoutGroupHandler>();
 
-  final _dbManager = inject<DatabaseManager>();
 
   String? _temporaryCarga;
   String? _videoTitle;
@@ -532,7 +530,6 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
           data: currentDateYYYYMMDD(),
           workoutId: widget._seletctedWorkout.id);
 
-      // _dbManager.insertItem(table: 'workouts', data: data);
 
       Navigator.of(context).pop();
 
