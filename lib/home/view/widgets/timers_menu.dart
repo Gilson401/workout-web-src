@@ -10,14 +10,14 @@ enum PercentDisplaMode {
   line
 }
 
-class OtpTimer extends StatefulWidget {
-  const OtpTimer({super.key});
+class TimersMenu extends StatefulWidget {
+  const TimersMenu({super.key});
 
   @override
-  OtpTimerState createState() => OtpTimerState();
+  TimersMenuState createState() => TimersMenuState();
 }
 
-class OtpTimerState extends State<OtpTimer> {
+class TimersMenuState extends State<TimersMenu> {
   final interval = const Duration(seconds: 1);
   final ButtonStyle raisedButtonStyle  = AppConstants.raisedButtonStyle;
   

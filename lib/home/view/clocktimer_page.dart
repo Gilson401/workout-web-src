@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/home/view/widgets/otp_timer.dart';
+import 'package:hello_flutter/home/view/widgets/timers_menu.dart';
 
 class ClockTimerPage extends StatelessWidget {
   const ClockTimerPage({super.key});
@@ -13,7 +13,7 @@ class ClockTimerPage extends StatelessWidget {
         elevation: 10,
       ),
       body: Center(
-        child: OtpTimer(),
+        child: TimersMenu(),
       ),
     );
   }

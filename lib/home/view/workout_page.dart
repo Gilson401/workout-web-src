@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hello_flutter/utils/app_constants.dart';
 import 'package:hello_flutter/utils/app_controller.dart';
-import 'package:hello_flutter/home/controller/local_storage_workout_handler.dart';
+import 'package:hello_flutter/home/repository/local_storage_workout_handler.dart';
 import 'package:hello_flutter/utils/ui_helpers.dart';
-import 'package:hello_flutter/home/model/workout.dart';
+import 'package:hello_flutter/home/model/workout_model.dart';
 import 'package:hello_flutter/utils/date_mixins.dart';
 import 'package:hello_flutter/home/view/widgets/responsive_wrapper.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -13,14 +13,14 @@ import 'package:hello_flutter/di/inject.dart';
 import 'package:hello_flutter/home/view/widgets/workout_group_handler.dart';
 
 class WorkoutPage extends StatefulWidget {
-  final Workout _seletctedWorkout;
+  final WorkoutModel _seletctedWorkout;
   final TextStyle textStyle;
   final Function? reRenderFn;
 
   const WorkoutPage({
     Key? key,
     this.reRenderFn,
-    required Workout seletctedWorkout,
+    required WorkoutModel seletctedWorkout,
     required this.textStyle,
   })  : _seletctedWorkout = seletctedWorkout,
         super(key: key);

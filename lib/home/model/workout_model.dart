@@ -1,5 +1,5 @@
 import 'dart:convert';
-class Workout {
+class WorkoutModel {
   String nome;
   String grupoMuscular;
   String repeticoes;
@@ -14,7 +14,7 @@ class Workout {
   String currentCarga = "";
     
 
-  Workout({
+  WorkoutModel({
     required this.nome,
     required this.grupoMuscular,
     this.repeticoes = "",
@@ -26,11 +26,11 @@ class Workout {
     this.orientacoes
   });
 
-  factory Workout.fromJson(Map<String, dynamic> json) {
+  factory WorkoutModel.fromJson(Map<String, dynamic> json) {
     
     List<String> list = List<String>.from(json['orientacoes']);
 
-    return Workout(
+    return WorkoutModel(
       nome: json['nome'] ?? "",
       grupoMuscular: json['grupoMuscular'] ?? "",
       id: json['id'] as int,

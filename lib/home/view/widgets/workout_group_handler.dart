@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
-import 'package:hello_flutter/home/model/grupo_muscular.dart';
-import 'package:hello_flutter/home/controller/local_storage_workout_handler.dart';
-import 'package:hello_flutter/home/model/workout.dart';
+import 'package:hello_flutter/home/model/muscular_group_model.dart';
+import 'package:hello_flutter/home/repository/local_storage_workout_handler.dart';
+import 'package:hello_flutter/home/model/workout_model.dart';
 import 'package:hello_flutter/utils/app_constants.dart';
 import 'dart:convert';
 
@@ -10,20 +10,20 @@ class WorkoutGroupHandler {
 
   String testeSt = '';
 
-  List<GrupoMuscular> gruposMusculares = [
-    GrupoMuscular.color(
+  List<MuscularGroupModel> gruposMusculares = [
+    MuscularGroupModel.color(
         label: 'A: Peito e Ombros',
         svg: AppConstants.svgA,
         color: Color.fromARGB(155, 43, 179, 151)),
-    GrupoMuscular.color(
+    MuscularGroupModel.color(
         label: 'B: Costas e Ombro',
         svg: AppConstants.svgB,
         color: Color.fromARGB(155, 248, 252, 35)),
-    GrupoMuscular.color(
+    MuscularGroupModel.color(
         label: 'C: Pernas',
         svg: AppConstants.svgC,
         color: Color.fromARGB(155, 131, 131, 128)),
-    GrupoMuscular.color(
+    MuscularGroupModel.color(
         label: 'D: Bíceps e Tríceps',
         svg: AppConstants.svgD,
         color: Color.fromARGB(155, 243, 79, 51))
@@ -32,7 +32,7 @@ class WorkoutGroupHandler {
   LocalStorageWorkoutHandler localStorageWorkoutHandler =
       LocalStorageWorkoutHandler();
 
-  List<Workout> _workoutItemsFromLocalJson = [];
+  List<WorkoutModel> _workoutItemsFromLocalJson = [];
 
   Future<void> loadDataLocal() async {
     final String response =
@@ -42,8 +42,8 @@ class WorkoutGroupHandler {
 
     List<dynamic> exerciciosFromJson = jsonMapFromLocalJson['exercicios'];
 
-    List<Workout> parsedListWorkout =
-        exerciciosFromJson.map((element) => Workout.fromJson(element)).toList();
+    List<WorkoutModel> parsedListWorkout =
+        exerciciosFromJson.map((element) => WorkoutModel.fromJson(element)).toList();
 
     _workoutItemsFromLocalJson = parsedListWorkout;
 
@@ -51,7 +51,7 @@ class WorkoutGroupHandler {
   }
 
   Future<void> _updateWithLocalStorage() async {
-    for (Workout item in _workoutItemsFromLocalJson) {
+    for (WorkoutModel item in _workoutItemsFromLocalJson) {
       await localStorageWorkoutHandler.updateWorkoutWithStoredLocalData(item);
     }
   }
@@ -75,9 +75,9 @@ class WorkoutGroupHandler {
   }
 
 
-  List<Workout> workoutListFromGroup(String grupoMuscular) {
+  List<WorkoutModel> workoutListFromGroup(String grupoMuscular) {
 
-    List<Workout> filtredList = _workoutItemsFromLocalJson
+    List<WorkoutModel> filtredList = _workoutItemsFromLocalJson
         .where((element) => element.grupoMuscular == grupoMuscular)
         .toList();
 

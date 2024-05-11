@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/home/model/grupo_muscular.dart';
-import 'package:hello_flutter/home/controller/local_storage_workout_handler.dart';
-import 'package:hello_flutter/home/model/workout.dart';
+import 'package:hello_flutter/di/inject.dart';
+import 'package:hello_flutter/home/controller/home_controller.dart';
+import 'package:hello_flutter/home/model/muscular_group_model.dart';
+import 'package:hello_flutter/home/repository/local_storage_workout_handler.dart';
+import 'package:hello_flutter/home/model/workout_model.dart';
 import 'package:hello_flutter/utils/app_constants.dart';
 import 'package:hello_flutter/home/view/widgets/workout_list_tile.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:hello_flutter/utils/ui_helpers.dart';
 
 enum ImageType { img, svg, unset }
 
@@ -24,20 +25,22 @@ class WorkoutGroup extends StatefulWidget {
 class WorkoutGroupState extends State<WorkoutGroup> {
   Color _currentColor = Color.fromARGB(0, 255, 255, 255);
 
-  List<GrupoMuscular> gruposMusculares = [
-    GrupoMuscular.color(
+  final controller = inject<HomeController>();
+
+  List<MuscularGroupModel> gruposMusculares = [
+    MuscularGroupModel.color(
         label: 'A: Peito e Ombros',
         svg: AppConstants.svgA,
         color: Color.fromARGB(155, 43, 179, 151)),
-    GrupoMuscular.color(
+    MuscularGroupModel.color(
         label: 'B: Costas e Ombro',
         svg: AppConstants.svgB,
         color: Color.fromARGB(155, 248, 252, 35)),
-    GrupoMuscular.color(
+    MuscularGroupModel.color(
         label: 'C: Pernas',
         svg: AppConstants.svgC,
         color: Color.fromARGB(155, 131, 131, 128)),
-    GrupoMuscular.color(
+    MuscularGroupModel.color(
         label: 'D: Bíceps e Tríceps',
         svg: AppConstants.svgD,
         color: Color.fromARGB(155, 243, 79, 51))
@@ -46,7 +49,7 @@ class WorkoutGroupState extends State<WorkoutGroup> {
   LocalStorageWorkoutHandler localStorageWorkoutHandler =
       LocalStorageWorkoutHandler();
 
-  _onListTileClick(Workout workout) {
+  _onListTileClick(WorkoutModel workout) {
     widget.setWorkout(workout);
     setState(() {
       _currentWorkoutId = workout.id;
@@ -54,17 +57,17 @@ class WorkoutGroupState extends State<WorkoutGroup> {
   }
 
   var forceRender = 1;
-  List<Workout> _items = [];
+  List<WorkoutModel> _items = [];
 
-  List<Workout> _displayItems = [];
-  List<Workout> _listWorkout = [];
+  List<WorkoutModel> _displayItems = [];
+  List<WorkoutModel> _listWorkout = [];
 
   int? _currentWorkoutId;
 
   @override
   void initState() {
     super.initState();
-    _loadDataLocal();
+    Future(() async => await _loadData(context));
   }
 
   void resetCurrentWorkoutIndex() {
@@ -73,36 +76,35 @@ class WorkoutGroupState extends State<WorkoutGroup> {
     });
   }
 
- 
   Future<void> updateWithLocalStorage() async {
-    for (Workout item in _items) {
+    for (WorkoutModel item in _items) {
       await localStorageWorkoutHandler.updateWorkoutWithStoredLocalData(item);
     }
   }
 
+  Future<void> _loadData(BuildContext context) async {
+    controller.loadData().then((decoded) {
+      List<WorkoutModel> parsedListWorkout =
+          decoded.map((element) => WorkoutModel.fromJson(element)).toList();
 
-  Future<void> _loadDataLocal() async {
-    String workoutApi =
-        "https://my-json-server.typicode.com/Gilson401/json_placeholder/exercicios";
-
-    try {
-      http.Response response = await http.get(Uri.parse(workoutApi));
-      List<dynamic> decoded = jsonDecode(response.body);
-      List<Workout> parsedListWorkout =
-          decoded.map((element) => Workout.fromJson(element)).toList();
+      if (parsedListWorkout.isEmpty) {
+        UiHelpers.showSnackbar(
+            context: context, message: 'A busca não obteve dados.');
+      }
 
       setState(() {
-         _items = parsedListWorkout;
-      _listWorkout = parsedListWorkout;
-      _displayItems = parsedListWorkout;
+        _items = parsedListWorkout;
+        _listWorkout = parsedListWorkout;
+        _displayItems = parsedListWorkout;
       });
-    } catch (err) {
-      print(err);
-    }
+    }).catchError((err) {
+      UiHelpers.showSnackbar(
+          context: context, message: 'Houve um erro ao obter os dados.');
+    });
   }
 
-  void _filterExercicesDisplayList(GrupoMuscular grupoMuscular) {
-    List<Workout> filtredList = _listWorkout
+  void _filterExercicesDisplayList(MuscularGroupModel grupoMuscular) {
+    List<WorkoutModel> filtredList = _listWorkout
         .where((element) => element.grupoMuscular == grupoMuscular.label)
         .toList();
 
@@ -115,8 +117,8 @@ class WorkoutGroupState extends State<WorkoutGroup> {
     });
   }
 
-  void sortDisplayListByLastDayDone(List<Workout> filtredList) {
-    filtredList.sort(( a, b) => getLastTenCharacters(a.lastDayDone)
+  void sortDisplayListByLastDayDone(List<WorkoutModel> filtredList) {
+    filtredList.sort((a, b) => getLastTenCharacters(a.lastDayDone)
         .compareTo((getLastTenCharacters(b.lastDayDone))));
   }
 
@@ -138,8 +140,8 @@ class WorkoutGroupState extends State<WorkoutGroup> {
     return '$ano-$mes-$dia';
   }
 
-  String _findLatestDate(GrupoMuscular grupoMuscular) {
-    List<Workout> exerciciosDoGrupoComLastDoneDay = [];
+  String _findLatestDate(MuscularGroupModel grupoMuscular) {
+    List<WorkoutModel> exerciciosDoGrupoComLastDoneDay = [];
 
     String tempSt = "";
 
@@ -156,7 +158,6 @@ class WorkoutGroupState extends State<WorkoutGroup> {
       exerciciosDoGrupoComLastDoneDay.sort((a, b) =>
           getLastTenCharacters(a.lastDayDone)
               .compareTo((getLastTenCharacters(b.lastDayDone))));
-   
 
       tempSt = exerciciosDoGrupoComLastDoneDay
           .map((element) => element.lastDayDone)
@@ -210,7 +211,7 @@ class WorkoutGroupState extends State<WorkoutGroup> {
     );
   }
 
-  Widget showImage(GrupoMuscular group) {
+  Widget showImage(MuscularGroupModel group) {
     if (group.image != "") {
       return Image.asset(
         group.image,
@@ -235,7 +236,7 @@ class WorkoutGroupState extends State<WorkoutGroup> {
   }
 
   Widget _buildRow(int position) {
-    List<Workout> itemsLocally = _displayItems;
+    List<WorkoutModel> itemsLocally = _displayItems;
     return ListTileTheme(
         selectedColor: Colors.black,
         child: WorkoutListTile(

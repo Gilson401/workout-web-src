@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hello_flutter/di/inject.dart';
 import 'package:hello_flutter/home/view/widgets/workout_group_handler.dart';
-import 'package:hello_flutter/home/controller/local_storage_workout_handler.dart';
-import 'package:hello_flutter/home/model/workout.dart';
+import 'package:hello_flutter/home/repository/local_storage_workout_handler.dart';
+import 'package:hello_flutter/home/model/workout_model.dart';
 class SettingsPage extends StatefulWidget {
   final Function? reRenderFn;
 
@@ -65,9 +65,9 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                   onPressed: () {
-                    List<Workout> listWorkout =
+                    List<WorkoutModel> listWorkout =
                         _workoutGroupHandler.workoutListFromGroup(st);
-                    for (Workout wk in listWorkout) {
+                    for (WorkoutModel wk in listWorkout) {
                       wk.setSeriesFeitas(0);
                       localStorageManager.saveWorkoutData(wk);
                       if (widget.reRenderFn != null) {

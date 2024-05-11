@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'package:hello_flutter/pages/settings_page.dart';
 import 'package:hello_flutter/utils/timer_periodic.dart';
-import 'package:hello_flutter/home/model/workout.dart';
+import 'package:hello_flutter/home/model/workout_model.dart';
 import 'package:hello_flutter/home/view/widgets/timer_button.dart';
 import 'package:hello_flutter/home/view/widgets/workout_group.dart';
-import 'package:hello_flutter/home/view/widgets/clocktimer_page.dart';
+import 'package:hello_flutter/home/view/clocktimer_page.dart';
 
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     ),
   );
 
-  void setCurrentWorkout(Workout workout) async {
+  void setCurrentWorkout(WorkoutModel workout) async {
     _controller.loadVideoById(videoId: workout.videoId);
     _controller.pauseVideo();
   }

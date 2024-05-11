@@ -1,23 +1,22 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hello_flutter/home/controller/url_constants.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class HomeController extends InheritedNotifier<ValueNotifier<int>> {
-  
-  final String homeControllerStringVar = "Text stored in homeControllerStringVar ";
+class HomeController {
+  HomeController({Key? key});
 
-  HomeController({Key? key, required Widget child})
-      : super(
-          key: key,
-          child: child,
-          notifier: ValueNotifier(0),
-        );
+  Future<List<dynamic>> loadData() async {
+    List<dynamic> decoded = [{}];
+    try {
+      http.Response response =
+          await http.get(Uri.parse(UrlConstants.workoutApi));
+      decoded = jsonDecode(response.body);
+      
+    } catch (err) {
+      throw Exception(err.toString());
+    }
 
-  int get value => notifier!.value;
-
-  increment() {
-    notifier!.value++;
-  }
-
-  static HomeController of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<HomeController>()!;
+    return decoded;
   }
 }

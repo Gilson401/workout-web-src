@@ -94,7 +94,6 @@ flutter:
     - assets/imgs/leg.png
     - assets/imgs/ombros.png
     - assets/imgs/peito.png
-    - assets/json/series.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
