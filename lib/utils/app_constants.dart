@@ -10,7 +10,7 @@ static  String storageWorkoutSerieDone = "${storageBaseKey}SeriesDone_";
 static String seriesDoneStorageKey(int id) => "$storageWorkoutSerieDone$id";
 
 
-static  String seriesAssetJson = 'assets/json/series.json';
+// static  String seriesAssetJson = 'assets/json/series.json';
 
 static  String svgA = 'assets/imgs/a.svg';
 static  String svgB = 'assets/imgs/b.svg';
