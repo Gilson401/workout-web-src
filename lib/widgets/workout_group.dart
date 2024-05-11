@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hello_flutter/utils/grupo_muscular.dart';
 import 'package:hello_flutter/utils/local_storage_workout_handler.dart';
 import 'package:hello_flutter/utils/workout.dart';
 import 'package:hello_flutter/utils/app_constants.dart';
 import 'package:hello_flutter/widgets/workout_list_tile.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 enum ImageType { img, svg, unset }
@@ -74,49 +73,33 @@ class WorkoutGroupState extends State<WorkoutGroup> {
     });
   }
 
-  Future<void> _loadDataLocal() async {
-    final String response =
-        await rootBundle.loadString(AppConstants.seriesAssetJson);
-
-    final jsonMapFromLocalJson = await json.decode(response);
-
-    List<dynamic> exerciciosFromJson = jsonMapFromLocalJson['exercicios'];
-
-    List<Workout> parsedListWorkout =
-        exerciciosFromJson.map((element) => Workout.fromJson(element)).toList();
-
-    setState(() {
-      _items = parsedListWorkout;
-      _listWorkout = parsedListWorkout;
-      _displayItems = parsedListWorkout;
-    });
-    await updateWithLocalStorage();
-  }
-
+ 
   Future<void> updateWithLocalStorage() async {
     for (Workout item in _items) {
       await localStorageWorkoutHandler.updateWorkoutWithStoredLocalData(item);
     }
   }
 
-//este método é pela api
-  // _loadData() async {
-  //   String workoutApi =
-  //       "https://my-json-server.typicode.com/Gilson401/json_placeholder/exercicios";
 
-  //   try {
-  //     http.Response response = await http.get(Uri.parse(workoutApi));
-  //     List<dynamic> decoded = jsonDecode(response.body);
-  //     List<Workout> parsedListWorkout =
-  //         decoded.map((element) => Workout.fromJson(element)).toList();
+  Future<void> _loadDataLocal() async {
+    String workoutApi =
+        "https://my-json-server.typicode.com/Gilson401/json_placeholder/exercicios";
 
-  //     setState(() {
-  //       _items = parsedListWorkout;
-  //     });
-  //   } catch (err) {
-  //     print(err);
-  //   }
-  // }
+    try {
+      http.Response response = await http.get(Uri.parse(workoutApi));
+      List<dynamic> decoded = jsonDecode(response.body);
+      List<Workout> parsedListWorkout =
+          decoded.map((element) => Workout.fromJson(element)).toList();
+
+      setState(() {
+         _items = parsedListWorkout;
+      _listWorkout = parsedListWorkout;
+      _displayItems = parsedListWorkout;
+      });
+    } catch (err) {
+      print(err);
+    }
+  }
 
   void _filterExercicesDisplayList(GrupoMuscular grupoMuscular) {
     List<Workout> filtredList = _listWorkout

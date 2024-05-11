@@ -66,7 +66,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    print('Context Home ${context.hashCode}');
 
     return Scaffold(
       appBar: AppBar(

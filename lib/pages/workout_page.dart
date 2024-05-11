@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hello_flutter/database/workout_database_model.dart';
 import 'package:hello_flutter/utils/app_constants.dart';
 import 'package:hello_flutter/utils/app_controller.dart';
 import 'package:hello_flutter/utils/local_storage_workout_handler.dart';
 import 'package:hello_flutter/utils/ui_helpers.dart';
 import 'package:hello_flutter/utils/workout.dart';
 import 'package:hello_flutter/utils/date_mixins.dart';
+import 'package:hello_flutter/widgets/responsive_wrapper.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:hello_flutter/widgets/timer_button.dart';
 import 'package:hello_flutter/di/inject.dart';
@@ -74,9 +74,7 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
     _setCurrentWorkoutCarga('appMayWorkoutIdId_${widget._seletctedWorkout.id}');
 
     _controller.listen((event) {
-      print('LOG ${event.playerState}');
-
-      if (event.metaData.title != "" && event.metaData.title != null) {
+      if (event.metaData.title != "" && event.metaData.title.isNotEmpty) {
         setState(() => _videoTitle = event.metaData.title);
       }
     });
@@ -304,217 +302,219 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget._seletctedWorkout.nome,
-          softWrap: true,
-          maxLines: 2,
-        ),
-        elevation: 10,
-        actions: [
-          PopupMenuButton<String>(
-            key: popMenuKey,
-            //   onSelected: (value) {
-
-            //  },
-            itemBuilder: (BuildContext context) => [
-              PopupMenuItem<String>(
-                value: 'reset',
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          resetDataForToday();
+    return ResponsiveWrapper(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            widget._seletctedWorkout.nome,
+            softWrap: true,
+            maxLines: 2,
+          ),
+          elevation: 10,
+          actions: [
+            PopupMenuButton<String>(
+              key: popMenuKey,
+              //   onSelected: (value) {
+      
+              //  },
+              itemBuilder: (BuildContext context) => [
+                PopupMenuItem<String>(
+                  value: 'reset',
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            resetDataForToday();
+                            Navigator.of(context).pop();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Icon(Icons.reset_tv),
+                          ),
+                        ),
+                      ),
+                      Text('Zerar Hoje'),
+                    ],
+                  ),
+                ),
+                PopupMenuItem<String>(
+                  value: 'finished',
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Switch(
+                        value:
+                            widget._seletctedWorkout.lastDayDone == dateCurrent,
+                        onChanged: (bool value) {
+                          value
+                              ? widget._seletctedWorkout
+                                  .setLastDayDone(dateCurrent)
+                              : widget._seletctedWorkout.setLastDayDone("");
+      
+                          localStorageManager
+                              .saveWorkoutData(widget._seletctedWorkout);
+      
+                          widget.reRenderFn!();
                           Navigator.of(context).pop();
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Icon(Icons.reset_tv),
-                        ),
+                        activeColor: Color.fromARGB(255, 2, 86, 155),
+                        inactiveTrackColor: Color.fromARGB(141, 13, 17, 24),
                       ),
-                    ),
-                    Text('Zerar Hoje'),
-                  ],
-                ),
-              ),
-              PopupMenuItem<String>(
-                value: 'finished',
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Switch(
-                      value:
-                          widget._seletctedWorkout.lastDayDone == dateCurrent,
-                      onChanged: (bool value) {
-                        value
-                            ? widget._seletctedWorkout
-                                .setLastDayDone(dateCurrent)
-                            : widget._seletctedWorkout.setLastDayDone("");
-
-                        localStorageManager
-                            .saveWorkoutData(widget._seletctedWorkout);
-
-                        widget.reRenderFn!();
-                        Navigator.of(context).pop();
-                      },
-                      activeColor: Color.fromARGB(255, 2, 86, 155),
-                      inactiveTrackColor: Color.fromARGB(141, 13, 17, 24),
-                    ),
-                    Text('Tá pago'),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10.0),
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height * 0.33),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Repetições: ${widget._seletctedWorkout.repeticoes}",
-                      softWrap: true,
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  columSpacer(10),
-                  executionCounter(),
-                  columSpacer(10),
-                  Stack(
-                    children: [
-                      if (widget._seletctedWorkout.lastDayDone == dateCurrent)
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.95,
-                          height: 200,
-                          child: SvgPicture.asset(AppConstants.checked),
-                        ),
-                      Column(
-                        children: [
-                          ...workoutInstructions(),
-                        ],
-                      )
+                      Text('Tá pago'),
                     ],
                   ),
-                  columSpacer(10),
-                  Text("Carga obs.: ${widget._seletctedWorkout.carga}",
-                      softWrap: true),
-                  columSpacer(10),
-                ],
-              ),
+                ),
+              ],
             ),
-            columSpacer(10),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: Colors.blue.shade100,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                child: Row(
+          ],
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(10.0),
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height * 0.33),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Text(_temporaryCarga ?? "", softWrap: true),
+                    Text("Repetições: ${widget._seletctedWorkout.repeticoes}",
+                        softWrap: true,
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    columSpacer(10),
+                    executionCounter(),
+                    columSpacer(10),
+                    Stack(
+                      children: [
+                        if (widget._seletctedWorkout.lastDayDone == dateCurrent)
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.95,
+                            height: 200,
+                            child: SvgPicture.asset(AppConstants.checked),
+                          ),
+                        Column(
+                          children: [
+                            ...workoutInstructions(),
+                          ],
+                        )
+                      ],
                     ),
-                    rowSpacer(5),
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () async {
-                        await _showModal(context);
-                        _focusNode.requestFocus();
-                      },
-                    ),
+                    columSpacer(10),
+                    Text("Carga obs.: ${widget._seletctedWorkout.carga}",
+                        softWrap: true),
+                    columSpacer(10),
                   ],
                 ),
               ),
-            ),
-            columSpacer(10),
-            timerButtons(),
-            columSpacer(10),
-            if (widget._seletctedWorkout.image != "")
-              Center(
-                child: SizedBox(
-                    height: 270,
-                    child: Image.network(widget._seletctedWorkout.image)),
-              ),
-            columSpacer(10),
-            if (widget._seletctedWorkout.videoId == "")
-              AspectRatio(
-                aspectRatio: 16 / 9,
-                child: DecoratedBox(
-                  decoration: boxNotDisponible(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+              columSpacer(10),
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade100,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: Row(
                     children: [
-                      Text(
-                        'Não há vídeo definido para este item.',
-                        style: TextStyle(color: Colors.white),
+                      Expanded(
+                        child: Text(_temporaryCarga ?? "", softWrap: true),
                       ),
-                      columSpacer(30),
-                      Center(
-                          child: Icon(
-                        Icons.videocam_off_rounded,
-                        size: 100.0,
-                      )),
+                      rowSpacer(5),
+                      IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () async {
+                          await _showModal(context);
+                          _focusNode.requestFocus();
+                        },
+                      ),
                     ],
                   ),
                 ),
               ),
-            if (!_showvideo && widget._seletctedWorkout.videoId != "")
-              InkWell(
-                onTap: () {
-                  _controller.loadVideoById(
-                      videoId: widget._seletctedWorkout.videoId);
-                  setState(() => _showvideo = true);
-                },
-                child: AspectRatio(
+              columSpacer(10),
+              timerButtons(),
+              columSpacer(10),
+              if (widget._seletctedWorkout.image != "")
+                Center(
+                  child: SizedBox(
+                      height: 270,
+                      child: Image.network(widget._seletctedWorkout.image)),
+                ),
+              columSpacer(10),
+              if (widget._seletctedWorkout.videoId == "")
+                AspectRatio(
                   aspectRatio: 16 / 9,
                   child: DecoratedBox(
-                      decoration: boxNotDisponible(),
-                      child: Center(
-                          child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Toque para carregar o vídeo',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          columSpacer(30),
-                          Icon(
-                            Icons.smart_display,
-                            size: 100.0,
-                          )
-                        ],
-                      ))),
+                    decoration: boxNotDisponible(),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Não há vídeo definido para este item.',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        columSpacer(30),
+                        Center(
+                            child: Icon(
+                          Icons.videocam_off_rounded,
+                          size: 100.0,
+                        )),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            if (_videoTitle != null)
-              Center(
-                  child: Text(_videoTitle ?? "",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20.0))),
-            if (_showvideo && widget._seletctedWorkout.videoId != "")
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: YoutubePlayer(
-                  controller: _controller,
-                  aspectRatio: 16 / 9,
-                  backgroundColor: Color.fromARGB(255, 35, 35, 87),
+              if (!_showvideo && widget._seletctedWorkout.videoId != "")
+                InkWell(
+                  onTap: () {
+                    _controller.loadVideoById(
+                        videoId: widget._seletctedWorkout.videoId);
+                    setState(() => _showvideo = true);
+                  },
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: DecoratedBox(
+                        decoration: boxNotDisponible(),
+                        child: Center(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Toque para carregar o vídeo',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            columSpacer(30),
+                            Icon(
+                              Icons.smart_display,
+                              size: 100.0,
+                            )
+                          ],
+                        ))),
+                  ),
                 ),
-              ),
-          ],
+              if (_videoTitle != null)
+                Center(
+                    child: Text(_videoTitle ?? "",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20.0))),
+              if (_showvideo && widget._seletctedWorkout.videoId != "")
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: YoutubePlayer(
+                    controller: _controller,
+                    aspectRatio: 16 / 9,
+                    backgroundColor: Color.fromARGB(255, 35, 35, 87),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
@@ -525,14 +525,7 @@ class _WorkoutPageState extends State<WorkoutPage> with DateFunctions {
       widget._seletctedWorkout.setCurrentCarga(_temporaryCarga!);
       localStorageManager.saveWorkoutData(widget._seletctedWorkout);
 
-      var data = WorkoutDatabaseModel(
-          carga: _temporaryCarga!,
-          data: currentDateYYYYMMDD(),
-          workoutId: widget._seletctedWorkout.id);
-
-
       Navigator.of(context).pop();
-
       uiHelpers.dialog(
           context: context, title: "Feito.", message: '''Nova carga armazenada: 
           $_temporaryCarga''');

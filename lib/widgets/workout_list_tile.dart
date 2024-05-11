@@ -49,15 +49,15 @@ class _WorkoutListTileState extends State<WorkoutListTile> with DateFunctions {
     super.initState();
   }
 
-bool isTodayDone() => widget.workout.lastDayDone == dateCurrent;
+  bool isTodayDone() => widget.workout.lastDayDone == dateCurrent;
 
   @override
   Widget build(BuildContext context) {
-
-    // print('Context Workout ListTile ${context.hashCode}');
-
+    
     return ListTile(
-        tileColor: isTodayDone() ?  widget.currentColor.withOpacity(0.99) : widget.currentColor,
+        tileColor: isTodayDone()
+            ? widget.currentColor.withOpacity(0.99)
+            : widget.currentColor,
         selectedTileColor: widget.currentColor.withOpacity(0.99),
         selected: widget.currentWorkoutId == widget.workout.id,
         trailing: isTodayDone()
@@ -80,11 +80,13 @@ bool isTodayDone() => widget.workout.lastDayDone == dateCurrent;
               if (widget.workout.lastDayDone != "")
                 Text(widget.workout.lastDayDone, style: _font),
               SizedBox(width: 15),
-              Row(children: [
-
-              for (var i = 0; i < widget.workout.seriesFeitas; i++)
-                Icon(Icons.check_circle_outline, color: Colors.black, size: 16),
-              ],)
+              Row(
+                children: [
+                  for (var i = 0; i < widget.workout.seriesFeitas; i++)
+                    Icon(Icons.check_circle_outline,
+                        color: Colors.black, size: 16),
+                ],
+              )
             ],
           ),
         ),
@@ -97,19 +99,27 @@ bool isTodayDone() => widget.workout.lastDayDone == dateCurrent;
                   : Icon(Icons.image_not_supported)),
         ),
         onTap: () {
-          Navigator.of(context).push(
+          Navigator.of(context)
+              .push(
             MaterialPageRoute(
-                builder: (context) => WorkoutPage(
+                builder: (context) => 
+                
+                WorkoutPage(
+
                       seletctedWorkout: widget.workout,
                       textStyle: const TextStyle(
                         fontSize: 15.0,
                       ),
                       reRenderFn: widget.reRenderFn,
-                    )),
-          ).then((result) {
+                    )
+                    
+                    
+                    
+                    ),
+          )
+              .then((result) {
             widget.reRenderFn();
-  print('Retornou para a lista');
-});
+          });
         });
   }
 }

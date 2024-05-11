@@ -8,6 +8,7 @@ void main() {
    startModules();
 
  runApp(
+  
     App(), 
    );
 
